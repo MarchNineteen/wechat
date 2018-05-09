@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WechatAccoutApplication {
+public class AccoutApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WechatAccoutApplication.class, args);
+		SpringApplication.run(AccoutApplication.class, args);
 	}
 }
