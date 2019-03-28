@@ -46,17 +46,24 @@ public class MenuUtil {
         cb_3.setType("view");
 
 
-        ViewButton cb_4 = new ViewButton();
-        cb_4.setName("百度");
-        cb_4.setType("view");
+//        ViewButton cb_4 = new ViewButton();
+//        cb_4.setName("百度");
+//        cb_4.setType("view");
         //需要使用网页授权获取微信用户的信息
 //        cb_4.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=要访问的网页 &response_type=code&scope=snsapi_base&state=xxx");
-        cb_4.setUrl("https://www.baidu.com");
+//        cb_4.setUrl("https://www.baidu.com");
+
+        ViewButton cb_5 = new ViewButton();
+        cb_5.setName("测试授权登录");
+        cb_5.setType("view");
+        //需要使用网页授权获取微信用户的信息
+        cb_5.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx555e719fb5428862&redirect_uri=http://wybcs.wezoz.com/getAccessToken&response_type=code&scope=snsapi_userinfo&state=1001#wechat_redirect");
+//        cb_4.setUrl("http://wybcs.wezoz.com/code");
 
         //创建第二个一级菜单
         ComplexButton cx_2 = new ComplexButton();
         cx_2.setName("view");
-        cx_2.setSub_button(new Button[]{cb_3, cb_4});
+        cx_2.setSub_button(new Button[]{cb_3, cb_5});
 
         //封装菜单数据
         Menu menu = new Menu();

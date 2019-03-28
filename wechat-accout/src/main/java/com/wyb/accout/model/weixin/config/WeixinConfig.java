@@ -12,12 +12,12 @@ public class WeixinConfig {
     /**
      * appid
      */
-    public static final String WEIXIN_APPID = "wxc8ec1841f53febcb"; //
+    public static final String WEIXIN_APPID = "wx555e719fb5428862"; //
 
     /**
      * SECRET
      */
-    public static final String WEIXIN_APPSECRET = "a5afcffe8de3f08002dc6775d9ea674a";//
+    public static final String WEIXIN_APPSECRET = "f3aafcdeb913a5990893854f2938f204";//
 
     /**
      * 商户号
@@ -41,7 +41,7 @@ public class WeixinConfig {
     /**
      * 授权之后的回调地址
      */
-    public static final String WEIXIN_AUTH_REDIRECT_URL = "http://wybtxy.tunnel.qydev.com/getAccessToken";
+    public static final String WEIXIN_AUTH_REDIRECT_URL = "http://wybcs.wezoz.com/getAccessToken";
 
     /**
      * access Token
