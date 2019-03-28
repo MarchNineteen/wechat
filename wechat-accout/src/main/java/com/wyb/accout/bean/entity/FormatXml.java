@@ -1,4 +1,4 @@
-package com.wyb.accout.model.weixin.entity;
+package com.wyb.accout.bean.entity;
 
 import java.util.Date;
 

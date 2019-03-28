@@ -1,9 +1,9 @@
 package com.wyb.accout.utils;
 
 import com.alibaba.fastjson.JSONObject;
-import com.wyb.accout.model.weixin.config.WeixinConfig;
-import com.wyb.accout.model.weixin.entity.WeixinAccessTokenEntity;
-import com.wyb.accout.model.weixin.entity.WeixinUserInfoEntity;
+import com.wyb.accout.bean.config.WeixinConfig;
+import com.wyb.accout.bean.entity.WeixinAccessTokenEntity;
+import com.wyb.accout.bean.entity.WeixinUserInfoEntity;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -22,6 +22,9 @@ public class WxMpInMemoryConfigStorage implements WxMpConfigStorage, Serializabl
     protected volatile long expiresTime;// 过期时间
     protected volatile boolean autoRefreshToken;
 
+    public WxMpInMemoryConfigStorage() {
+    }
+
     public WxMpInMemoryConfigStorage(String appId, String secret) {
         this.appId = appId;
         this.secret = secret;
@@ -84,4 +87,31 @@ public class WxMpInMemoryConfigStorage implements WxMpConfigStorage, Serializabl
         return autoRefreshToken;
     }
 
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
+
+    public void setSecret(String secret) {
+        this.secret = secret;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public void setAesKey(String aesKey) {
+        this.aesKey = aesKey;
+    }
+
+    public void setExpiresTime(long expiresTime) {
+        this.expiresTime = expiresTime;
+    }
+
+    public void setAutoRefreshToken(boolean autoRefreshToken) {
+        this.autoRefreshToken = autoRefreshToken;
+    }
 }

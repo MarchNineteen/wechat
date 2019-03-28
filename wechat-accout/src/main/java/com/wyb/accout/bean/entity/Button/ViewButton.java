@@ -1,4 +1,4 @@
-package com.wyb.accout.model.weixin.entity.Button;
+package com.wyb.accout.bean.entity.Button;
 
 /**
  * 表示二级菜单（VIEW类型）

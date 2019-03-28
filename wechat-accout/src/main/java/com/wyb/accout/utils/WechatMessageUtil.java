@@ -2,8 +2,8 @@ package com.wyb.accout.utils;
 
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
-import com.wyb.accout.model.weixin.entity.FormatXml;
-import com.wyb.accout.model.weixin.entity.ReceiveXmlEntity;
+import com.wyb.accout.bean.entity.FormatXml;
+import com.wyb.accout.bean.entity.ReceiveXmlEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
@@ -72,7 +72,7 @@ public class WechatMessageUtil {
             msg = new ReceiveXmlEntity();
             //利用反射机制，调用set方法
             //获取该实体的元类型
-            Class<?> c = Class.forName("com.wyb.accout.model.weixin.entity.ReceiveXmlEntity");
+            Class<?> c = Class.forName("com.wyb.accout.bean.entity.ReceiveXmlEntity");
             msg = (ReceiveXmlEntity) c.newInstance();//创建这个实体的对象
 
             while (iter.hasNext()) {

@@ -1,4 +1,4 @@
-package com.wyb.accout.model.weixin.entity.Button;
+package com.wyb.accout.bean.entity.Button;
 
 /**
  * Created by Kunzite on 2016/9/29.

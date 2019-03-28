@@ -1,4 +1,4 @@
-package com.wyb.accout.model.weixin.entity;
+package com.wyb.accout.bean.entity;
 
 /**
  * Created by Kunzite on 2016/9/13.

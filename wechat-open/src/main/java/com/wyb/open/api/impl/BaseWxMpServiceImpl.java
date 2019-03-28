@@ -2,11 +2,16 @@ package com.wyb.open.api.impl;
 
 import com.wyb.open.api.WxMpService;
 import com.wyb.open.bean.result.WxMpOAuth2AccessToken;
+import com.wyb.open.bean.result.WxMpUser;
 import com.wyb.open.common.exception.WxErrorException;
 import com.wyb.open.api.WxMpConfigStorage;
 import com.wyb.open.common.util.http.HttpUtil;
 import com.wyb.open.common.util.http.URIUtil;
 import lombok.extern.slf4j.Slf4j;
+
+import java.io.IOException;
+
+import static com.sun.tools.doclint.Entity.lang;
 
 /**
  * @author Kunzite
@@ -30,13 +35,7 @@ public abstract class BaseWxMpServiceImpl implements WxMpService {
     }
 
     /**
-     * <pre>
      * 构造oauth2授权的url连接. 即获取code
-     * 详情请见: http://mp.weixin.qq.com/wiki/index.php?title=网页授权获取用户基本信息
-     * </pre>
-     *
-     * @param redirectURI 用户授权完成后的重定向链接，无需urlencode, 方法内会进行encode
-     * @return url
      */
     @Override
     public String oauth2buildAuthorizationUrl(String redirectURI, String scope, String state) {
@@ -53,6 +52,12 @@ public abstract class BaseWxMpServiceImpl implements WxMpService {
         return this.getOAuth2AccessToken(url);
     }
 
+    @Override
+    public WxMpUser oauth2getUserInfo(WxMpOAuth2AccessToken token) throws WxErrorException {
+        String url = String.format(WxMpService.OAUTH2_USERINFO_URL, token.getAccessToken(), token.getOpenId(), null);
+        String response = HttpUtil.get(url, null);
+        return WxMpUser.fromJson(response);
+    }
 
     public void setRetrySleepMillis(int retrySleepMillis) {
         this.retrySleepMillis = retrySleepMillis;

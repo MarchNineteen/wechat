@@ -1,20 +1,17 @@
 package com.wyb.accout.controller;
 
 import com.wyb.accout.enums.WeixinAuthEnum;
-import com.wyb.accout.model.weixin.config.WeixinConfig;
-import com.wyb.accout.model.weixin.entity.WeixinAccessTokenEntity;
-import com.wyb.accout.model.weixin.entity.WeixinUserInfoEntity;
+import com.wyb.accout.bean.config.WeixinConfig;
 import com.wyb.accout.utils.*;
-import com.wyb.open.api.WxMpConfigStorage;
 import com.wyb.open.api.WxMpService;
-import com.wyb.open.api.impl.WxMpInMemoryConfigStorage;
-import com.wyb.open.api.impl.WxMpServiceImpl;
 import com.wyb.open.bean.result.WxMpOAuth2AccessToken;
+import com.wyb.open.bean.result.WxMpUser;
 import com.wyb.open.common.exception.WxErrorException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +24,8 @@ import java.util.ArrayList;
 @Controller
 public class WexinController {
 
-    private final String token = "asfasdjasbdgjayfguajsvdjasbdjaygdas";
+    @Resource
+    private WxMpService wxMpService;
 
     /**-------------------------页面授权------------------------------------*/
     /**
@@ -51,7 +49,7 @@ public class WexinController {
         array.add(timestamp);
         array.add(nonce);
         //排序
-        String sortString = CommonUtils.sort(token, timestamp, nonce);
+        String sortString = CommonUtils.sort(wxMpService.getWxMpConfigStorage().getToken(), timestamp, nonce);
         //加密
         String mytoken = CommonUtils.SHA1(sortString);
         //校验签名
@@ -84,12 +82,8 @@ public class WexinController {
 
         if (StringUtils.isNotBlank(code)) {
 //            WeixinAccessTokenEntity weixinTokenEntity = WeixinAuthUtil.getOauthAccessToken(code);
-
-            WxMpConfigStorage wxMpConfigStorage = new WxMpInMemoryConfigStorage("wx555e719fb5428862", "f3aafcdeb913a5990893854f2938f204");
-            WxMpService wxMpService = new WxMpServiceImpl();
-            wxMpService.setWxMpConfigStorage(wxMpConfigStorage);
-            WxMpOAuth2AccessToken accessToekn = wxMpService.oauth2getAccessToken(code);
-
+            WxMpOAuth2AccessToken accessToken = wxMpService.oauth2getAccessToken(code);
+            WxMpUser wxMpUser = wxMpService.oauth2getUserInfo(accessToken);
             return "/test/success";
         } else {
             //跳转页面

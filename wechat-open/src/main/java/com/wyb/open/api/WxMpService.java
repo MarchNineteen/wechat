@@ -117,6 +117,13 @@ public interface WxMpService {
 
 
     /**
+     * <pre>
+     * 用oauth2获取用户信息, 当前面引导授权时的scope是snsapi_userinfo的时候才可以.
+     * </pre>
+     */
+    WxMpUser oauth2getUserInfo(WxMpOAuth2AccessToken token) throws WxErrorException;
+
+    /**
      * 获取微信配置
      */
     public WxMpConfigStorage getWxMpConfigStorage();

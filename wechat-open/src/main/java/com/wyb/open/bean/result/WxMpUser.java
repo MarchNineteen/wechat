@@ -1,5 +1,7 @@
 package com.wyb.open.bean.result;
 
+import com.wyb.open.util.json.WxMpGsonBuilder;
+
 import java.io.Serializable;
 
 /**
@@ -210,5 +212,14 @@ public class WxMpUser implements Serializable {
 
     public void setQrSceneStr(String qrSceneStr) {
         this.qrSceneStr = qrSceneStr;
+    }
+
+    public static WxMpUser fromJson(String json) {
+        return WxMpGsonBuilder.create().fromJson(json, WxMpUser.class);
+    }
+
+    @Override
+    public String toString() {
+        return WxMpGsonBuilder.create().toJson(this);
     }
 }

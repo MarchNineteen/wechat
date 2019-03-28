@@ -1,4 +1,4 @@
-package com.wyb.accout.model.weixin.config;
+package com.wyb.accout.bean.config;
 
 /**
  * Created by Kunzite on 2016/9/14.

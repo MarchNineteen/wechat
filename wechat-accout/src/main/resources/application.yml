@@ -77,3 +77,11 @@ jwt:
   header: Authorization
   secret: wangyb
   issuer: WANG YINGBO
+
+
+
+wx:
+  appId: wx555e719fb5428862
+  appSecret: f3aafcdeb913a5990893854f2938f204
+  token: asfasdjasbdgjayfguajsvdjasbdjaygdas
+  aesKey:

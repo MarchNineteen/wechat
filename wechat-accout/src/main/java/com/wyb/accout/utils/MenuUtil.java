@@ -1,7 +1,7 @@
 package com.wyb.accout.utils;
 
 import com.alibaba.fastjson.JSONObject;
-import com.wyb.accout.model.weixin.entity.Button.*;
+import com.wyb.accout.bean.entity.Button.*;
 
 import java.io.IOException;
 import java.io.InputStream;
