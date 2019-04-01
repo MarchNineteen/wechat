@@ -71,7 +71,7 @@ public interface WxMpService {
      * @param state       非必填，用于保持请求和回调的状态，授权请求后原样带回给第三方。该参数可用于防止csrf攻击（跨站请求伪造攻击），建议第三方带上该参数，可设置为简单的随机数加session进行校验
      * @return url
      */
-//    String buildQrConnectUrl(String redirectURI, String scope, String state);
+    String buildQrConnectUrl(String redirectURI, String scope, String state);
 
     /**
      * <pre>

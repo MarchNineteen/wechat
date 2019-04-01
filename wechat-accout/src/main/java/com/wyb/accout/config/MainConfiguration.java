@@ -4,11 +4,10 @@ import com.wyb.open.api.WxMpConfigStorage;
 import com.wyb.open.api.WxMpService;
 import com.wyb.open.api.impl.WxMpInMemoryConfigStorage;
 import com.wyb.open.api.impl.WxMpServiceImpl;
+import com.wyb.open.qq.api.QqApiService;
+import com.wyb.open.qq.api.impl.QqApiServiceImpl;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 /**
@@ -46,5 +45,11 @@ public class MainConfiguration {
         WxMpService wxMpService = new WxMpServiceImpl();
         wxMpService.setWxMpConfigStorage(wxMpConfigStorage());
         return wxMpService;
+    }
+
+    @Bean
+    public QqApiService qqService() {
+        QqApiService qqApiService = new QqApiServiceImpl();
+        return qqApiService;
     }
 }

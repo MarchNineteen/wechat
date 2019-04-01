@@ -72,6 +72,16 @@ public class WexinController {
     }
 
     /**
+     * 网页登录获取code
+     */
+    @RequestMapping(value = "/web/code")
+    public void getWebCode(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String weiXinAuthUrl = wxMpService.buildQrConnectUrl("http://wybcs.wezoz.com/getAccessToken", "snsapi_login", null);
+        response.sendRedirect(weiXinAuthUrl);
+    }
+
+
+    /**
      * code换取access_token
      */
     @RequestMapping(value = "getAccessToken")

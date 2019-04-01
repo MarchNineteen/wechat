@@ -8,10 +8,7 @@ import com.wyb.open.api.WxMpConfigStorage;
 import com.wyb.open.common.util.http.HttpUtil;
 import com.wyb.open.common.util.http.URIUtil;
 import lombok.extern.slf4j.Slf4j;
-
-import java.io.IOException;
-
-import static com.sun.tools.doclint.Entity.lang;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author Kunzite
@@ -34,6 +31,11 @@ public abstract class BaseWxMpServiceImpl implements WxMpService {
         return getAccessToken(false);
     }
 
+    @Override
+    public String buildQrConnectUrl(String redirectURI, String scope, String state) {
+        return String.format(WxMpService.QRCONNECT_URL,
+                this.getWxMpConfigStorage().getAppId(), URIUtil.encodeURIComponent(redirectURI), scope, StringUtils.trimToEmpty(state));
+    }
     /**
      * 构造oauth2授权的url连接. 即获取code
      */
