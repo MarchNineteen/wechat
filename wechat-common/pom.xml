@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
 
     <name>wechat-common</name>
-    <description>common公告模块</description>
+    <description>common公共模块</description>
     <parent>
         <artifactId>wechat</artifactId>
         <groupId>com.wyb</groupId>
