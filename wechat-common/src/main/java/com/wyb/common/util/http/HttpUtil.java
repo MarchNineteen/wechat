@@ -24,15 +24,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
 /**
  * @author Kunzite
  * @date 2016/9/23
- *
  * @ClassName: RequestUtils
  * @Description: 请求工具类
  */
+@Slf4j
 public final class HttpUtil {
-
     private final static String GET = "get";
     private final static String POST = "post";
 
@@ -117,16 +117,16 @@ public final class HttpUtil {
             while ((line = in.readLine()) != null) {
                 result += line;
             }
-//            log.error("http request==================================================");
-//            log.error("http request url :" + uri);
-//            log.error("http request response :" + result);
-//            log.error("http request==================================================");
+            log.error("http request==================================================");
+            log.error("http request url :" + uri);
+            log.error("http request response :" + result);
+            log.error("http request==================================================");
         } catch (UnsupportedEncodingException e) {
-//            log.error("请求" + uri + "异常", e);
+            log.error("请求" + uri + "异常", e);
         } catch (HttpException e) {
-//            log.error("请求" + uri + "异常", e);
+            log.error("请求" + uri + "异常", e);
         } catch (IOException e) {
-//            log.error("请求" + uri + "异常", e);
+            log.error("请求" + uri + "异常", e);
         } finally {
             if (null != httpMethod) {
                 httpMethod.releaseConnection();
