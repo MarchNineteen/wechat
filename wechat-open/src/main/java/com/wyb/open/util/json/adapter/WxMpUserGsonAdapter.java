@@ -2,7 +2,7 @@ package com.wyb.open.util.json.adapter;
 
 import com.google.gson.*;
 import com.wyb.open.bean.result.WxMpUser;
-import com.wyb.open.common.util.json.GsonHelper;
+import com.wyb.common.util.json.GsonHelper;
 
 import java.lang.reflect.Type;
 

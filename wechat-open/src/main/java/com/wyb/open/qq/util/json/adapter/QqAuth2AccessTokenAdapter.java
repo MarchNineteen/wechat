@@ -1,7 +1,7 @@
 package com.wyb.open.qq.util.json.adapter;
 
 import com.google.gson.*;
-import com.wyb.open.common.util.json.GsonHelper;
+import com.wyb.common.util.json.GsonHelper;
 import com.wyb.open.qq.bean.result.QqOAuth2AccessToken;
 
 import java.lang.reflect.Type;

@@ -2,8 +2,8 @@ package com.wyb.open.qq.util.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.wyb.open.qq.bean.result.QqOAuth2AccessToken;
 import com.wyb.open.qq.util.json.adapter.QqAuth2AccessTokenAdapter;
+import com.wyb.open.qq.bean.result.QqOAuth2AccessToken;
 
 /**
  * @author wangyb

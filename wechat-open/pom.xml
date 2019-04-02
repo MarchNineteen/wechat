@@ -5,12 +5,13 @@
     <parent>
         <groupId>com.wyb</groupId>
         <artifactId>wechat</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
     <groupId>com.wyb</groupId>
     <artifactId>wechat-open</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>wechat-open</name>
+    <packaging>jar</packaging>
     <description>微信开放平台demo</description>
 
     <properties>
@@ -18,6 +19,12 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.wyb</groupId>
+            <artifactId>wechat-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>

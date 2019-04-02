@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.wyb.accout.bean.config.WeixinConfig;
 import com.wyb.accout.bean.entity.WeixinAccessTokenEntity;
 import com.wyb.accout.bean.entity.WeixinUserInfoEntity;
+import com.wyb.common.util.http.HttpUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

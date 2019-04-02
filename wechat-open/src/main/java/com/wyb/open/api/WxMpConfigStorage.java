@@ -1,6 +1,7 @@
 package com.wyb.open.api;
 
-import com.wyb.open.common.bean.WxMpCommonAccessToken;
+
+import com.wyb.common.bean.WxMpCommonAccessToken;
 
 /**
  * 微信配置接口

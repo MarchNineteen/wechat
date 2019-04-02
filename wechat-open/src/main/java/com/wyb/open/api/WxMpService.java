@@ -1,8 +1,8 @@
 package com.wyb.open.api;
 
+import com.wyb.common.exception.WxErrorException;
 import com.wyb.open.bean.result.WxMpOAuth2AccessToken;
 import com.wyb.open.bean.result.WxMpUser;
-import com.wyb.open.common.exception.WxErrorException;
 
 /**
  * @author Kunzite
@@ -37,6 +37,19 @@ public interface WxMpService {
      * oauth2授权的url连接. (获取code)
      */
     String CONNECT_OAUTH2_AUTHORIZE_URL = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=%s&state=%s&connect_redirect=1#wechat_redirect";
+
+    /**
+     * 获取微信服务器IP地址.
+     */
+    String GET_CALLBACK_IP_URL = "https://api.weixin.qq.com/cgi-bin/getcallbackip";
+
+    /**
+     * <pre>
+     * 验证消息的确来自微信服务器.
+     * 详情请见: http://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421135319&token=&lang=zh_CN
+     * </pre>
+     */
+    boolean checkSignature(String timestamp, String nonce, String signature);
 
     /**
      * 获取access_token, 不强制刷新access_token.
@@ -115,6 +128,13 @@ public interface WxMpService {
 //     */
 //    boolean oauth2validateAccessToken(WxMpOAuth2AccessToken oAuth2AccessToken);
 
+    /**
+     * <pre>
+     * 获取微信服务器IP地址
+     * http://mp.weixin.qq.com/wiki/0/2ad4b6bfd29f30f71d39616c2a0fcedc.html
+     * </pre>
+     */
+    String[] getCallbackIP() throws WxErrorException;
 
     /**
      * <pre>

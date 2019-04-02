@@ -6,11 +6,13 @@
 package com.wyb.open.qq.api.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.wyb.open.common.util.http.HttpUtil;
-import com.wyb.open.common.util.http.URIUtil;
+import com.wyb.open.qq.bean.result.QqOAuth2AccessToken;
+import com.wyb.common.util.http.HttpUtil;
+import com.wyb.common.util.http.URIUtil;
 import com.wyb.open.qq.api.QqApiService;
 import com.wyb.open.qq.api.QqConfigStorage;
-import com.wyb.open.qq.bean.result.QqOAuth2AccessToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,6 +24,7 @@ import java.util.regex.Pattern;
  * @version $$ Revision: 1.0 $$, $$ Date: 2019/4/1 14:56 $$
  */
 public class QqApiServiceImpl implements QqApiService {
+    public final Logger log = LoggerFactory.getLogger(this.getClass());
 
     // auth2授权的url连接. 获取code
     public static final String QQ_CONNECT_OAUTH2_AUTHORIZE_URL = "https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=%s&redirect_uri=%s&state=%s&scope=%s&display=%s";
@@ -58,6 +61,7 @@ public class QqApiServiceImpl implements QqApiService {
             token.setOpenId(qqAuth2getOpenID(token.getAccessToken()));
             return token;
         } catch (Exception e) {
+            log.info("qqAuth2getAccessToken() error, message: {}", e.getMessage());
             return null;
         }
     }
@@ -71,7 +75,7 @@ public class QqApiServiceImpl implements QqApiService {
             JSONObject jsonObject = JSONObject.parseObject(result);
             return jsonObject.getString("openid");
         } catch (Exception e) {
-            e.printStackTrace();
+            log.info("qqAuth2getOpenID() error, accessToken:{}, message: {}", accessToken, e.getMessage());
             return null;
         }
     }

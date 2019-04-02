@@ -1,7 +1,7 @@
 package com.wyb.open.api.impl;
 
 
-import com.wyb.open.common.exception.WxErrorException;
+import com.wyb.common.exception.WxErrorException;
 
 /**
  * @author wangyb

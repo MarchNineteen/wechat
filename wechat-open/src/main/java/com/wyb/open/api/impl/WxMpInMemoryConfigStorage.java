@@ -1,7 +1,7 @@
 package com.wyb.open.api.impl;
 
 import com.wyb.open.api.WxMpConfigStorage;
-import com.wyb.open.common.bean.WxMpCommonAccessToken;
+import com.wyb.common.bean.WxMpCommonAccessToken;
 
 
 import java.io.Serializable;

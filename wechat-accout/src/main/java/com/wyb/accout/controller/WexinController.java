@@ -1,12 +1,12 @@
 package com.wyb.accout.controller;
 
-import com.wyb.accout.enums.WeixinAuthEnum;
 import com.wyb.accout.bean.config.WeixinConfig;
-import com.wyb.accout.utils.*;
+import com.wyb.accout.enums.WeixinAuthEnum;
+import com.wyb.accout.utils.CommonUtils;
+import com.wyb.common.exception.WxErrorException;
 import com.wyb.open.api.WxMpService;
 import com.wyb.open.bean.result.WxMpOAuth2AccessToken;
 import com.wyb.open.bean.result.WxMpUser;
-import com.wyb.open.common.exception.WxErrorException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

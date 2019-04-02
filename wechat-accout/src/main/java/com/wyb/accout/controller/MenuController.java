@@ -1,10 +1,10 @@
 package com.wyb.accout.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.wyb.accout.utils.HttpUtil;
 import com.wyb.accout.utils.MenuUtil;
 import com.wyb.accout.utils.WechatMessageUtil;
 import com.wyb.accout.utils.WeixinAuthUtil;
+import com.wyb.common.util.http.HttpUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
