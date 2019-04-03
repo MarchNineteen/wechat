@@ -7,7 +7,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @author wangyb
+ * @author Kunzite
  * @version $$ Revision: 1.0 $$, $$ Date: 2019/3/26 16:31 $$
  */
 @Data

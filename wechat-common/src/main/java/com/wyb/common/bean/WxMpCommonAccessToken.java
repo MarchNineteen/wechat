@@ -3,7 +3,7 @@ package com.wyb.common.bean;
 import java.io.Serializable;
 
 /**
- * @author wangyb
+ * @author Kunzite
  */
 public class WxMpCommonAccessToken implements Serializable {
     private static final long serialVersionUID = 6791484774851818662L;
