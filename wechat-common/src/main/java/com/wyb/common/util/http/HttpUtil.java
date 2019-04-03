@@ -42,8 +42,8 @@ public final class HttpUtil {
      * @param uri
      * @return
      */
-    public static String post(String uri, String postbody) {
-        return post(uri, null, postbody);
+    public static String post(String uri, String postBody) {
+        return post(uri, null, postBody);
     }
 
     /**
@@ -99,7 +99,7 @@ public final class HttpUtil {
      * @param params
      * @return
      */
-    private static String requestString(String uri, String method, Map<String, String> params, String postbody) {
+    private static String requestString(String uri, String method, Map<String, String> params, String postBody) {
         String result = "";
         HttpMethodBase httpMethod = null;
         try {
@@ -110,7 +110,7 @@ public final class HttpUtil {
             }
             HttpClient httpClient = new HttpClient();
             httpClient.getHttpConnectionManager().getParams().setConnectionTimeout(5000);
-            httpMethod = initMethod(uri, method, params, postbody);
+            httpMethod = initMethod(uri, method, params, postBody);
             int statusCode = httpClient.executeMethod(httpMethod);
             BufferedReader in = new BufferedReader(new InputStreamReader(httpMethod.getResponseBodyAsStream(), "UTF-8"));
             String line = "";
@@ -139,14 +139,14 @@ public final class HttpUtil {
      * @param uri
      * @param method
      * @param params
-     * @param postbody
+     * @param postBody
      * @return HttpMethodBase
      * @throws UnsupportedEncodingException
      * @throws
      * @Title: initMethod
      * @Description: 初始化请求方式
      */
-    private static HttpMethodBase initMethod(String uri, String method, Map<String, String> params, String postbody)
+    private static HttpMethodBase initMethod(String uri, String method, Map<String, String> params, String postBody)
             throws UnsupportedEncodingException {
         if (StringUtils.equalsIgnoreCase(GET, method)) {
             return new GetMethod(formatMapToUrl(uri, params));
@@ -161,8 +161,8 @@ public final class HttpUtil {
                 }
                 ((PostMethod) httpMethod).addParameters(pairs.toArray(new NameValuePair[0]));
             }
-            if (StringUtils.isNotEmpty(postbody)) {
-                RequestEntity requestEntity = new StringRequestEntity(postbody,
+            if (StringUtils.isNotEmpty(postBody)) {
+                RequestEntity requestEntity = new StringRequestEntity(postBody,
                         null, "utf-8");
                 ((PostMethod) httpMethod).setRequestEntity(requestEntity);
             }

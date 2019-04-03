@@ -6,7 +6,7 @@ import com.wyb.common.util.json.GsonHelper;
 
 import java.lang.reflect.Type;
 
-public class WxMpOAuth2AccessTokenAdapter implements JsonDeserializer<WxMpOAuth2AccessToken> {
+public class WxMpOAuth2AccessTokenGsonAdapter implements JsonDeserializer<WxMpOAuth2AccessToken> {
 
   @Override
   public WxMpOAuth2AccessToken deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws

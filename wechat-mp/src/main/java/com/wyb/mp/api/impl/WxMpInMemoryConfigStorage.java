@@ -1,10 +1,12 @@
 package com.wyb.mp.api.impl;
 
 import com.wyb.mp.api.WxMpConfigStorage;
-import com.wyb.common.bean.WxMpCommonAccessToken;
+import com.wyb.common.bean.WxAccessToken;
 
 
 import java.io.Serializable;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author Kunzite
@@ -21,6 +23,8 @@ public class WxMpInMemoryConfigStorage implements WxMpConfigStorage, Serializabl
     protected volatile String aesKey;
     protected volatile long expiresTime;// 过期时间
     protected volatile boolean autoRefreshToken;
+
+    protected Lock accessTokenLock = new ReentrantLock();
 
     public WxMpInMemoryConfigStorage() {
     }
@@ -46,7 +50,7 @@ public class WxMpInMemoryConfigStorage implements WxMpConfigStorage, Serializabl
     }
 
     @Override
-    public void updateAccessToken(WxMpCommonAccessToken accessToken) {
+    public void updateAccessToken(WxAccessToken accessToken) {
         updateAccessToken(accessToken.getAccessToken(), accessToken.getExpiresIn());
     }
 
@@ -113,5 +117,13 @@ public class WxMpInMemoryConfigStorage implements WxMpConfigStorage, Serializabl
 
     public void setAutoRefreshToken(boolean autoRefreshToken) {
         this.autoRefreshToken = autoRefreshToken;
+    }
+
+    public Lock getAccessTokenLock() {
+        return accessTokenLock;
+    }
+
+    public void setAccessTokenLock(Lock accessTokenLock) {
+        this.accessTokenLock = accessTokenLock;
     }
 }

@@ -1,7 +1,9 @@
 package com.wyb.mp.api;
 
 
-import com.wyb.common.bean.WxMpCommonAccessToken;
+import com.wyb.common.bean.WxAccessToken;
+
+import java.util.concurrent.locks.Lock;
 
 /**
  * 微信配置接口
@@ -30,7 +32,7 @@ public interface WxMpConfigStorage {
      *
      * @param accessToken 要更新的WxAccessToken对象
      */
-    void updateAccessToken(WxMpCommonAccessToken accessToken);
+    void updateAccessToken(WxAccessToken accessToken);
 
     /**
      * 应该是线程安全的.
@@ -54,4 +56,7 @@ public interface WxMpConfigStorage {
      * 是否自动刷新token.
      */
     boolean getAutoRefreshToken();
+
+    public Lock getAccessTokenLock();
+
 }

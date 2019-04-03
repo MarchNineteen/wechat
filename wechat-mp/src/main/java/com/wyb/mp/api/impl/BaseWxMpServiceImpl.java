@@ -8,10 +8,13 @@ import com.wyb.mp.api.WxMpService;
 import com.wyb.common.exception.WxErrorException;
 import com.wyb.common.util.http.HttpUtil;
 import com.wyb.common.util.http.URIUtil;
+import com.wyb.mp.api.WxMpTemplateMsgService;
 import com.wyb.mp.bean.result.WxMpOAuth2AccessToken;
 import com.wyb.mp.bean.result.WxMpUser;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.Map;
 
 /**
  * @author Kunzite
@@ -21,7 +24,7 @@ public abstract class BaseWxMpServiceImpl implements WxMpService {
     private static final JsonParser JSON_PARSER = new JsonParser();
 
     // 关联各个微信的api实现
-
+    private WxMpTemplateMsgService wxMpTemplateMsgService = new WxMpTemplateMsgServiceImpl(this);
 
     // 微信配置
     protected WxMpConfigStorage wxMpConfigStorage;
@@ -91,6 +94,24 @@ public abstract class BaseWxMpServiceImpl implements WxMpService {
         return ipArray;
     }
 
+
+    public String get(String url, Map<String, String> params) throws WxErrorException {
+        url += (url.contains("?") ? "&" : "?") + "access_token=" + getAccessToken();
+        return HttpUtil.get(url, params);
+    }
+
+    public String post(String url, Map<String, String> params) throws WxErrorException {
+        url += (url.contains("?") ? "&" : "?") + "access_token=" + getAccessToken();
+        return HttpUtil.post(url, params);
+    }
+
+    public String post(String url, String postBody) throws WxErrorException {
+        url += (url.contains("?") ? "&" : "?") + "access_token=" + getAccessToken();
+        return HttpUtil.post(url, postBody);
+    }
+
+
+
     public void setRetrySleepMillis(int retrySleepMillis) {
         this.retrySleepMillis = retrySleepMillis;
     }
@@ -105,5 +126,9 @@ public abstract class BaseWxMpServiceImpl implements WxMpService {
 
     public void setWxMpConfigStorage(WxMpConfigStorage wxMpConfigStorage) {
         this.wxMpConfigStorage = wxMpConfigStorage;
+    }
+
+    public WxMpTemplateMsgService getWxMpTemplateMsgService() {
+        return wxMpTemplateMsgService;
     }
 }

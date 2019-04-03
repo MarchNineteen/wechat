@@ -55,45 +55,6 @@ public class MenuController {
 //        String jsonObject1 = JSONObject.toJSONString(jsonObject);
 //    }
 
-    /**
-     * 接收消息
-     */
-    @RequestMapping(value = "/token", method = RequestMethod.POST)
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        //接收xml文件
-        StringBuffer sb = new StringBuffer();
-        InputStream is = request.getInputStream();
-        InputStreamReader isr = new InputStreamReader(is, "UTF-8");
-        BufferedReader br = new BufferedReader(isr);
-        String s = "";
-
-        while ((s = br.readLine()) != null) {
-            sb.append(s);
-        }
-        String xml = sb.toString(); //即为接收到微信端发送过来的xml数据
-
-        String result = "";
-        /** 判断是否是微信接入激活验证，只有首次接入验证时才会收到echostr参数，此时需要把它直接返回 */
-        String echostr = request.getParameter("echostr");
-        if (echostr != null && echostr.length() > 1) {
-            result = echostr;
-        } else {
-            //正常的微信处理流程
-            result = WechatMessageUtil.processWechatMag(xml);
-        }
-
-        try {
-            OutputStream os = response.getOutputStream();
-            os.write(result.getBytes("UTF-8"));
-            os.flush();
-            os.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public void createOrder() {
 
     }

@@ -4,6 +4,8 @@ import com.wyb.common.exception.WxErrorException;
 import com.wyb.mp.bean.result.WxMpOAuth2AccessToken;
 import com.wyb.mp.bean.result.WxMpUser;
 
+import java.util.Map;
+
 /**
  * @author Kunzite
  * 微信公众号API的service & 请求地址
@@ -143,6 +145,23 @@ public interface WxMpService {
      */
     WxMpUser oauth2getUserInfo(WxMpOAuth2AccessToken token) throws WxErrorException;
 
+
+    /**
+     * url附加token
+     */
+    public String get(String url, Map<String, String> params) throws WxErrorException;
+
+    /**
+     * url附加token
+     */
+    public String post(String url, Map<String, String> params) throws WxErrorException;
+
+    /**
+     * url附加token
+     */
+    public String post(String url, String postBody) throws WxErrorException;
+
+
     /**
      * 获取微信配置
      */
@@ -152,5 +171,7 @@ public interface WxMpService {
      * 注入 {@link WxMpConfigStorage} 的实现.
      */
     void setWxMpConfigStorage(WxMpConfigStorage wxConfigProvider);
+
+    public WxMpTemplateMsgService getWxMpTemplateMsgService();
 
 }
