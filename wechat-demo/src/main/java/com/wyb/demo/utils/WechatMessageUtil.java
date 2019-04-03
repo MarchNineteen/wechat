@@ -5,21 +5,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.wyb.common.util.http.HttpUtil;
 import com.wyb.demo.bean.entity.FormatXml;
 import com.wyb.demo.bean.entity.ReceiveXmlEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.net.URLEncoder;
 import java.util.Iterator;
 
 /**
