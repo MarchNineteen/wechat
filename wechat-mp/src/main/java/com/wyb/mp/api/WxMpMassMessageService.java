@@ -2,14 +2,19 @@ package com.wyb.mp.api;
 
 import com.wyb.common.exception.WxErrorException;
 import com.wyb.mp.bean.WxMpMassOpenIdsMessage;
+import com.wyb.mp.bean.message.WxMediaImgUploadResult;
 import com.wyb.mp.bean.message.WxMpMassNews;
 import com.wyb.mp.bean.result.WxMpMassSendResult;
 import com.wyb.mp.bean.result.WxMpMassUploadResult;
+
+import java.io.File;
 
 /**
  * 群发消息服务类.
  */
 public interface WxMpMassMessageService {
+
+    String IMG_UPLOAD_URL = "http://api.weixin.qq.com/cgi-bin/media/upload?type=image";
     /**
      * 上传群发用的图文消息.
      */
@@ -34,6 +39,21 @@ public interface WxMpMassMessageService {
      * 删除群发接口.
      */
     String MESSAGE_MASS_DELETE_URL = "https://api.weixin.qq.com/cgi-bin/message/mass/delete";
+
+
+    /**
+     * <pre>
+     * 上传图文消息内的图片获取URL
+     * 请注意，本接口所上传的图片不占用公众号的素材库中图片数量的5000个的限制。图片仅支持jpg/png格式，大小必须在1MB以下。
+     * 详情请见: <a href="http://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1444738729&token=&lang=zh_CN">新增永久素材</a>
+     * 接口url格式：https://api.weixin.qq.com/cgi-bin/media/uploadimg?access_token=ACCESS_TOKEN
+     * </pre>
+     *
+     * @param file 上传的文件对象
+     * @return WxMediaImgUploadResult 返回图片url
+     * @throws WxErrorException
+     */
+    WxMediaImgUploadResult mediaImgUpload(File file) throws WxErrorException;
 
     /**
      * <pre>

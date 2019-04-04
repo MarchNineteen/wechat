@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.wyb.mp.api.WxMpConfigStorage;
+import com.wyb.mp.api.WxMpMassMessageService;
 import com.wyb.mp.api.WxMpService;
 import com.wyb.common.exception.WxErrorException;
 import com.wyb.common.util.http.HttpUtil;
@@ -25,6 +26,7 @@ public abstract class BaseWxMpServiceImpl implements WxMpService {
 
     // 关联各个微信的api实现
     private WxMpTemplateMsgService wxMpTemplateMsgService = new WxMpTemplateMsgServiceImpl(this);
+    private WxMpMassMessageService wxMpMassMessageService = new WxMpMassMessageServiceImpl(this);
 
     // 微信配置
     protected WxMpConfigStorage wxMpConfigStorage;
@@ -130,5 +132,9 @@ public abstract class BaseWxMpServiceImpl implements WxMpService {
 
     public WxMpTemplateMsgService getWxMpTemplateMsgService() {
         return wxMpTemplateMsgService;
+    }
+
+    public WxMpMassMessageService getWxMpMassMessageService() {
+        return wxMpMassMessageService;
     }
 }

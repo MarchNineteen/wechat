@@ -15,7 +15,7 @@ public class WxGsonBuilder {
   static {
     INSTANCE.disableHtmlEscaping();
     INSTANCE.registerTypeAdapter(WxError.class, new WxErrorAdapter());
-    INSTANCE.registerTypeAdapter(WxAccessToken.class, new WxMpCommonAccessTokenAdapter());
+    INSTANCE.registerTypeAdapter(WxAccessToken.class, new WxAccessTokenAdapter());
   }
 
   public static Gson create() {

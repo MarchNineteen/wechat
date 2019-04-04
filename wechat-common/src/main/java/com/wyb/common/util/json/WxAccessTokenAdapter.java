@@ -8,7 +8,7 @@ import java.lang.reflect.Type;
 /**
  * @author Kunzite
  */
-public class WxMpCommonAccessTokenAdapter implements JsonDeserializer<WxAccessToken> {
+public class WxAccessTokenAdapter implements JsonDeserializer<WxAccessToken> {
 
     @Override
     public WxAccessToken deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {

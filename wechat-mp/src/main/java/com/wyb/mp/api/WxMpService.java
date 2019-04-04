@@ -174,4 +174,6 @@ public interface WxMpService {
 
     public WxMpTemplateMsgService getWxMpTemplateMsgService();
 
+    public WxMpMassMessageService getWxMpMassMessageService();
+
 }
