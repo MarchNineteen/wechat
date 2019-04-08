@@ -4,7 +4,7 @@ import java.lang.reflect.Type;
 
 import com.google.gson.*;
 import com.wyb.common.util.json.GsonHelper;
-import com.wyb.mp.bean.message.WxMediaImgUploadResult;
+import com.wyb.mp.bean.material.WxMediaImgUploadResult;
 
 /**
  * @author Kunzite

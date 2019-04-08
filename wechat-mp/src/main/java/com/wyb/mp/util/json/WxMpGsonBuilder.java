@@ -2,7 +2,9 @@ package com.wyb.mp.util.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.wyb.mp.bean.message.WxMediaImgUploadResult;
+import com.wyb.mp.bean.material.WxMediaImgUploadResult;
+import com.wyb.mp.bean.material.WxMpMaterialNews;
+import com.wyb.mp.bean.material.WxMpMaterialUploadResult;
 import com.wyb.mp.bean.message.WxMpMassOpenIdsMessage;
 import com.wyb.mp.bean.result.WxMpMassSendResult;
 import com.wyb.mp.bean.result.WxMpMassUploadResult;
@@ -21,6 +23,8 @@ public class WxMpGsonBuilder {
         INSTANCE.registerTypeAdapter(WxMpMassOpenIdsMessage.class, new WxMpMassOpenIdsMessageGsonAdapter());
 
         INSTANCE.registerTypeAdapter(WxMediaImgUploadResult.class, new WxMediaImgUploadResultGsonAdapter());
+        INSTANCE.registerTypeAdapter(WxMpMaterialUploadResult.class, new WxMpMaterialUploadResultAdapter());
+        INSTANCE.registerTypeAdapter(WxMpMaterialNews.WxMpMaterialNewsArticle.class, new WxMpMaterialNewsArticleGsonAdapter());
         INSTANCE.registerTypeAdapter(WxMpMassUploadResult.class, new WxMpMassUploadResultAdapter());
         INSTANCE.registerTypeAdapter(WxMpMassSendResult.class, new WxMpMassSendResultAdapter());
     }

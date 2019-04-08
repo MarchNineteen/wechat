@@ -1,4 +1,4 @@
-package com.wyb.mp.bean.message;
+package com.wyb.mp.bean.material;
 
 import java.io.Serializable;
 

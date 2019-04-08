@@ -2,7 +2,7 @@ package com.wyb.mp.api;
 
 import com.wyb.common.exception.WxErrorException;
 import com.wyb.mp.bean.message.WxMpMassOpenIdsMessage;
-import com.wyb.mp.bean.message.WxMediaImgUploadResult;
+import com.wyb.mp.bean.material.WxMediaImgUploadResult;
 import com.wyb.mp.bean.message.WxMpMassNews;
 import com.wyb.mp.bean.result.WxMpMassSendResult;
 import com.wyb.mp.bean.result.WxMpMassUploadResult;

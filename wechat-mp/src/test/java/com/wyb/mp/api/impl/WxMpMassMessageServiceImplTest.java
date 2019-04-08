@@ -1,23 +1,18 @@
 package com.wyb.mp.api.impl;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.UUID;
 
 import com.wyb.common.api.WxConsts;
-import com.wyb.common.exception.WxError;
 import com.wyb.common.exception.WxErrorException;
 import com.wyb.mp.bean.message.WxMpMassNews;
 import com.wyb.mp.bean.message.WxMpMassOpenIdsMessage;
 import com.wyb.mp.bean.result.WxMpMassSendResult;
 import com.wyb.mp.bean.result.WxMpMassUploadResult;
-import org.apache.commons.io.FileUtils;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.wyb.mp.api.WxMpService;
-import com.wyb.mp.bean.message.WxMediaImgUploadResult;
+import com.wyb.mp.bean.material.WxMediaImgUploadResult;
 
 import static org.junit.Assert.assertNotNull;
 
