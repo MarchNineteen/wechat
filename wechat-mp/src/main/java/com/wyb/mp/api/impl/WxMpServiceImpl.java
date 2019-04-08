@@ -4,7 +4,7 @@ package com.wyb.mp.api.impl;
 import com.wyb.common.bean.WxAccessToken;
 import com.wyb.common.exception.WxError;
 import com.wyb.common.exception.WxErrorException;
-import com.wyb.common.util.http.HttpUtil;
+import com.wyb.common.util.http.HttpClientUtil;
 import com.wyb.mp.api.WxMpService;
 
 import java.util.concurrent.locks.Lock;
@@ -23,7 +23,7 @@ public class WxMpServiceImpl extends BaseWxMpServiceImpl {
             if (this.getWxMpConfigStorage().isAccessTokenExpired() || forceRefresh) {
                 String url = String.format(WxMpService.GET_ACCESS_TOKEN_URL,
                         this.getWxMpConfigStorage().getAppId(), this.getWxMpConfigStorage().getSecret());
-                String resultContent = HttpUtil.get(url,null);
+                String resultContent = HttpClientUtil.doGet(url);
                 WxError error = WxError.fromJson(resultContent);
                 if (error.getErrorCode() != 0) {
                     throw new WxErrorException(error);

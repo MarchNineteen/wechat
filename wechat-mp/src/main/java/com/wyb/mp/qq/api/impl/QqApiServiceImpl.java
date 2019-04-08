@@ -6,8 +6,8 @@
 package com.wyb.mp.qq.api.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.wyb.common.util.http.HttpClientUtil;
 import com.wyb.mp.qq.bean.result.QqOAuth2AccessToken;
-import com.wyb.common.util.http.HttpUtil;
 import com.wyb.common.util.http.URIUtil;
 import com.wyb.mp.qq.api.QqApiService;
 import com.wyb.mp.qq.api.QqConfigStorage;
@@ -45,7 +45,7 @@ public class QqApiServiceImpl implements QqApiService {
         String sendUrl = String.format(QQ_OAUTH2_ACCESS_TOKEN_URL, grantType, qqConfigStorage.getAppId(), qqConfigStorage.getSecret(), code, redirectUri);
         try {
             QqOAuth2AccessToken token = new QqOAuth2AccessToken();
-            String result = HttpUtil.get(sendUrl, null);
+            String result = HttpClientUtil.doGet(sendUrl);
             Matcher m = Pattern.compile("^access_token=(\\w+)&expires_in=(\\w+)&refresh_token=(\\w+)$").matcher(result);
             if (m.find()) {
                 token.setAccessToken(m.group(1));
@@ -70,7 +70,7 @@ public class QqApiServiceImpl implements QqApiService {
     public String qqAuth2getOpenID(String accessToken) {
         String sendUrl = String.format(QQ_OPEN_ID_URL, accessToken);
         try {
-            String result = HttpUtil.get(sendUrl, null);
+            String result = HttpClientUtil.doGet(sendUrl);
             result = result.substring(result.indexOf("{"), result.indexOf("}") + 1);
             JSONObject jsonObject = JSONObject.parseObject(result);
             return jsonObject.getString("openid");

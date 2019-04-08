@@ -4,6 +4,7 @@ import com.wyb.common.exception.WxErrorException;
 import com.wyb.mp.bean.result.WxMpOAuth2AccessToken;
 import com.wyb.mp.bean.result.WxMpUser;
 
+import java.io.File;
 import java.util.Map;
 
 /**
@@ -158,8 +159,15 @@ public interface WxMpService {
 
     /**
      * url附加token
+     * jsonString
      */
-    public String post(String url, String postBody) throws WxErrorException;
+    public String post(String url, String jsonString) throws WxErrorException;
+
+    /**
+     * url附加token
+     * 上传文件
+     */
+    public String postFile(String url, File file) throws WxErrorException;
 
 
     /**

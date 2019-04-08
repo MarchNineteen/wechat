@@ -1,7 +1,7 @@
 package com.wyb.mp.api;
 
 import com.wyb.common.exception.WxErrorException;
-import com.wyb.mp.bean.WxMpMassOpenIdsMessage;
+import com.wyb.mp.bean.message.WxMpMassOpenIdsMessage;
 import com.wyb.mp.bean.message.WxMediaImgUploadResult;
 import com.wyb.mp.bean.message.WxMpMassNews;
 import com.wyb.mp.bean.result.WxMpMassSendResult;
@@ -14,7 +14,7 @@ import java.io.File;
  */
 public interface WxMpMassMessageService {
 
-    String IMG_UPLOAD_URL = "http://api.weixin.qq.com/cgi-bin/media/upload?type=image";
+    String IMG_UPLOAD_URL = "https://api.weixin.qq.com/cgi-bin/media/uploadimg";
     /**
      * 上传群发用的图文消息.
      */

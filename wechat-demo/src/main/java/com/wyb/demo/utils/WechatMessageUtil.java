@@ -1,17 +1,18 @@
 package com.wyb.demo.utils;
 
-import com.alibaba.fastjson.JSONException;
-import com.alibaba.fastjson.JSONObject;
-import com.wyb.common.util.http.HttpUtil;
-import com.wyb.demo.bean.entity.FormatXml;
-import com.wyb.demo.bean.entity.ReceiveXmlEntity;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.Iterator;
+
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.Iterator;
+import com.alibaba.fastjson.JSONException;
+import com.alibaba.fastjson.JSONObject;
+import com.wyb.common.util.http.HttpClientUtil;
+import com.wyb.demo.bean.entity.FormatXml;
+import com.wyb.demo.bean.entity.ReceiveXmlEntity;
 
 /**
  * @author Kunzite
@@ -110,7 +111,7 @@ public class WechatMessageUtil {
         postBody.put("perception", perception);
         postBody.put("userInfo", userInfo);
 
-        String result = HttpUtil.post(apiUrl, postBody.toString());
+        String result = HttpClientUtil.doPostJson(apiUrl, postBody.toString());
         // try {
         // param = apiUrl + URLEncoder.encode(content, "utf-8");
         // } catch (UnsupportedEncodingException e1) {

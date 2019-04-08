@@ -4,7 +4,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.wyb.common.exception.WxError;
 import com.wyb.common.exception.WxErrorException;
-import com.wyb.common.util.http.HttpUtil;
 import com.wyb.mp.api.WxMpService;
 import com.wyb.mp.api.WxMpTemplateMsgService;
 import com.wyb.mp.bean.template.WxMpTemplate;

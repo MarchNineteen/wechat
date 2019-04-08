@@ -1,10 +1,10 @@
 package com.wyb.demo.utils;
 
 import com.alibaba.fastjson.JSONObject;
+import com.wyb.common.util.http.HttpClientUtil;
 import com.wyb.demo.bean.config.WeixinConfig;
 import com.wyb.demo.bean.entity.WeixinAccessTokenEntity;
 import com.wyb.demo.bean.entity.WeixinUserInfoEntity;
-import com.wyb.common.util.http.HttpUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +35,7 @@ public class WeixinAuthUtil {
         _reqUrl = _reqUrl.replace("SECRET", WeixinConfig.WEIXIN_APPSECRET);
         _reqUrl = _reqUrl.replace("CODE", code);
         // 获取网页授权凭证
-        JSONObject jsonObject = HttpUtil.requestJSON(_reqUrl, null);
+        JSONObject jsonObject = HttpClientUtil.doGetJson(_reqUrl);
         String errorCode = jsonObject.getString("errcode");
         String errorMsg = jsonObject.getString("errmsg");
 
@@ -67,7 +67,7 @@ public class WeixinAuthUtil {
     public static JSONObject getWeiXinUserInfo(String accessToken, String openId) {
         String _reqUserInfoUrl = WEIXIN_USERINFO_URL;
         _reqUserInfoUrl = _reqUserInfoUrl.replace("ACCESS_TOKEN", accessToken).replace("OPENID", openId);
-        JSONObject weixinUserInfo = HttpUtil.requestJSON(_reqUserInfoUrl, null);
+        JSONObject weixinUserInfo = HttpClientUtil.doGetJson(_reqUserInfoUrl);
         return weixinUserInfo;
     }
 
@@ -124,7 +124,7 @@ public class WeixinAuthUtil {
 //        url.replace("APPID",WeixinConfig.WEIXIN_APPID).replace("APPSECRET",WeixinConfig.WEIXIN_APPSECRET);
         url = url.replace("APPID", WeixinConfig.WEIXIN_APPID);
         url = url.replace("APPSECRET", WeixinConfig.WEIXIN_APPSECRET);
-        JSONObject jsonObject = HttpUtil.requestJSON(url, null);
+        JSONObject jsonObject = HttpClientUtil.doGetJson(url);
         String errcode = jsonObject.getString("errcode");
         String errmsg = jsonObject.getString("errmsg");
         if (StringUtils.isNotBlank(errcode) || StringUtils.isNotBlank(errmsg)) {

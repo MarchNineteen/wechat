@@ -3,11 +3,11 @@ package com.wyb.mp.api.impl;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.wyb.common.util.http.HttpClientUtil;
 import com.wyb.mp.api.WxMpConfigStorage;
 import com.wyb.mp.api.WxMpMassMessageService;
 import com.wyb.mp.api.WxMpService;
 import com.wyb.common.exception.WxErrorException;
-import com.wyb.common.util.http.HttpUtil;
 import com.wyb.common.util.http.URIUtil;
 import com.wyb.mp.api.WxMpTemplateMsgService;
 import com.wyb.mp.bean.result.WxMpOAuth2AccessToken;
@@ -15,6 +15,7 @@ import com.wyb.mp.bean.result.WxMpUser;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.File;
 import java.util.Map;
 
 /**
@@ -68,7 +69,7 @@ public abstract class BaseWxMpServiceImpl implements WxMpService {
     }
 
     private WxMpOAuth2AccessToken getOAuth2AccessToken(String url) throws WxErrorException {
-        String response = HttpUtil.get(url, null);
+        String response = HttpClientUtil.doGet(url);
         return WxMpOAuth2AccessToken.fromJson(response);
     }
 
@@ -80,13 +81,13 @@ public abstract class BaseWxMpServiceImpl implements WxMpService {
     @Override
     public WxMpUser oauth2getUserInfo(WxMpOAuth2AccessToken token) throws WxErrorException {
         String url = String.format(WxMpService.OAUTH2_USERINFO_URL, token.getAccessToken(), token.getOpenId(), null);
-        String response = HttpUtil.get(url, null);
+        String response = HttpClientUtil.doGet(url, null);
         return WxMpUser.fromJson(response);
     }
 
     @Override
     public String[] getCallbackIP() throws WxErrorException {
-        String responseContent = HttpUtil.get(WxMpService.GET_CALLBACK_IP_URL, null);
+        String responseContent = HttpClientUtil.doGet(WxMpService.GET_CALLBACK_IP_URL, null);
         JsonElement tmpJsonElement = JSON_PARSER.parse(responseContent);
         JsonArray ipList = tmpJsonElement.getAsJsonObject().get("ip_list").getAsJsonArray();
         String[] ipArray = new String[ipList.size()];
@@ -99,19 +100,23 @@ public abstract class BaseWxMpServiceImpl implements WxMpService {
 
     public String get(String url, Map<String, String> params) throws WxErrorException {
         url += (url.contains("?") ? "&" : "?") + "access_token=" + getAccessToken();
-        return HttpUtil.get(url, params);
+        return HttpClientUtil.doGet(url, params);
     }
 
     public String post(String url, Map<String, String> params) throws WxErrorException {
         url += (url.contains("?") ? "&" : "?") + "access_token=" + getAccessToken();
-        return HttpUtil.post(url, params);
+        return HttpClientUtil.doPost(url, params);
     }
 
-    public String post(String url, String postBody) throws WxErrorException {
+    public String post(String url, String jsonString) throws WxErrorException {
         url += (url.contains("?") ? "&" : "?") + "access_token=" + getAccessToken();
-        return HttpUtil.post(url, postBody);
+        return HttpClientUtil.doPostJson(url, jsonString);
     }
 
+    public String postFile(String url, File file) throws WxErrorException {
+        url += (url.contains("?") ? "&" : "?") + "access_token=" + getAccessToken();
+        return HttpClientUtil.doPostFile(url, file);
+    }
 
 
     public void setRetrySleepMillis(int retrySleepMillis) {

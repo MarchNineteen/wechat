@@ -2,14 +2,14 @@ package com.wyb.mp.api.impl;
 
 import java.io.File;
 
-import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.wyb.common.exception.WxError;
 import com.wyb.common.exception.WxErrorException;
 import com.wyb.mp.api.WxMpMassMessageService;
 import com.wyb.mp.api.WxMpService;
-import com.wyb.mp.bean.WxMpMassOpenIdsMessage;
+import com.wyb.mp.bean.message.WxMpMassOpenIdsMessage;
 import com.wyb.mp.bean.message.WxMediaImgUploadResult;
 import com.wyb.mp.bean.message.WxMpMassNews;
 import com.wyb.mp.bean.result.WxMpMassSendResult;
@@ -32,9 +32,12 @@ public class WxMpMassMessageServiceImpl implements WxMpMassMessageService {
 
     @Override
     public WxMediaImgUploadResult mediaImgUpload(File file) throws WxErrorException {
-//        JSONObject jsonObject = new JSONObject();
-//        jsonObject.put("media", file.getAbsolutePath());
-        return WxMediaImgUploadResult.fromJson(wxMpService.post(IMG_UPLOAD_URL, file.toString()));
+        String responseContent = wxMpService.postFile(IMG_UPLOAD_URL, file);
+        WxError error = WxError.fromJson(responseContent);
+        if (error.getErrorCode() != 0) {
+            throw new WxErrorException(error);
+        }
+        return WxMediaImgUploadResult.fromJson(responseContent);
     }
 
     @Override
