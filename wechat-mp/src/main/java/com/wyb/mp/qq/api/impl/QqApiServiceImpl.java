@@ -33,6 +33,8 @@ public class QqApiServiceImpl implements QqApiService {
     // accessToken获取OpenId
     public static final String QQ_OPEN_ID_URL = "https://graph.qq.com/oauth2.0/me?access_token=%s";
 
+    public static final String QQ_USER_INFO_URL = "https://graph.qq.com/user/get_user_info?access_token=%s&oauth_consumer_key=%s&openid=%s";
+
     protected QqConfigStorage qqConfigStorage = new QqInMemoryConfigStorage("101562739", "ea2fb63dd20d7c5d9a6a50f84ca1735b");
 
     @Override
@@ -79,6 +81,14 @@ public class QqApiServiceImpl implements QqApiService {
             return null;
         }
     }
+
+    @Override
+    public JSONObject getUserInfo(QqOAuth2AccessToken auth2AccessToken) {
+        String sendUrl = String.format(QQ_USER_INFO_URL, auth2AccessToken.getAccessToken(), qqConfigStorage.getAppId(), auth2AccessToken.getOpenId());
+        return HttpClientUtil.doGetJson(sendUrl);
+    }
+
+
 
 
     public QqConfigStorage getQqConfigStorage() {

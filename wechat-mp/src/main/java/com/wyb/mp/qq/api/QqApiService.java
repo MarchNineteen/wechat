@@ -5,6 +5,7 @@
  */
 package com.wyb.mp.qq.api;
 
+import com.alibaba.fastjson.JSONObject;
 import com.wyb.mp.qq.bean.result.QqOAuth2AccessToken;
 
 public interface QqApiService {
@@ -32,4 +33,6 @@ public interface QqApiService {
      * @return
      */
     String qqAuth2getOpenID(String accessToken);
+
+    JSONObject getUserInfo(QqOAuth2AccessToken auth2AccessToken);
 }

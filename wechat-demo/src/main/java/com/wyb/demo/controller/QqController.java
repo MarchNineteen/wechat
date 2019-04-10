@@ -1,5 +1,6 @@
 package com.wyb.demo.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.wyb.mp.qq.api.QqApiService;
 import com.wyb.mp.qq.bean.result.QqOAuth2AccessToken;
 import org.apache.commons.lang3.StringUtils;
@@ -39,7 +40,8 @@ public class QqController {
 //          // 回调地址
             String redirectUri = "http://wybcs.wezoz.com/qq/getAccessToken";
             QqOAuth2AccessToken token = qqApiService.qqAuth2getAccessToken("authorization_code", code, redirectUri);
-            if (null == token);
+            if (null == token) ;
+            JSONObject jsonObject = qqApiService.getUserInfo(token);
             return "/test/success";
         } else {
             //跳转页面
