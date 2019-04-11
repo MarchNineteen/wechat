@@ -3,6 +3,7 @@ package com.wyb.demo.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.wyb.mp.qq.api.QqApiService;
 import com.wyb.mp.qq.bean.result.QqOAuth2AccessToken;
+import com.wyb.mp.qq.bean.result.QqUserInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,7 +42,13 @@ public class QqController {
             String redirectUri = "http://wybcs.wezoz.com/qq/getAccessToken";
             QqOAuth2AccessToken token = qqApiService.qqAuth2getAccessToken("authorization_code", code, redirectUri);
             if (null == token) ;
-            JSONObject jsonObject = qqApiService.getUserInfo(token);
+            QqUserInfo qqUserInfo = qqApiService.getUserInfo(token);
+            if (!"0".equals(qqUserInfo.getRet())) {
+                System.out.println(qqUserInfo.getMsg());
+            }
+            else {
+                System.out.println(qqUserInfo.toString());
+            }
             return "/test/success";
         } else {
             //跳转页面

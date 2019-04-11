@@ -11,29 +11,8 @@ package com.wyb.mp.qq.api;
  */
 public interface QqConfigStorage {
 
-    /**
-     * 获取accessToken
-     */
-    String getAccessToken();
-
-    /**
-     * accessToken是否过期
-     */
-    boolean isAccessTokenExpired();
-
     String getAppId();
 
     String getSecret();
-
-    /**
-     * 获取refresh_token
-     */
-    String getRefreshToken();
-
-
-    /**
-     * 过期时间
-     */
-    long getExpiresTime();
 
 }

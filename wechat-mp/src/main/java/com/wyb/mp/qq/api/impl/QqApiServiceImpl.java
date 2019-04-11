@@ -11,6 +11,7 @@ import com.wyb.mp.qq.bean.result.QqOAuth2AccessToken;
 import com.wyb.common.util.http.URIUtil;
 import com.wyb.mp.qq.api.QqApiService;
 import com.wyb.mp.qq.api.QqConfigStorage;
+import com.wyb.mp.qq.bean.result.QqUserInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -83,11 +84,10 @@ public class QqApiServiceImpl implements QqApiService {
     }
 
     @Override
-    public JSONObject getUserInfo(QqOAuth2AccessToken auth2AccessToken) {
+    public QqUserInfo getUserInfo(QqOAuth2AccessToken auth2AccessToken) {
         String sendUrl = String.format(QQ_USER_INFO_URL, auth2AccessToken.getAccessToken(), qqConfigStorage.getAppId(), auth2AccessToken.getOpenId());
-        return HttpClientUtil.doGetJson(sendUrl);
+        return QqUserInfo.fromJson(HttpClientUtil.doGet(sendUrl));
     }
-
 
 
 

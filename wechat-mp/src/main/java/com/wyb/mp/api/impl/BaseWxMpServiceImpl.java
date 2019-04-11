@@ -81,7 +81,7 @@ public abstract class BaseWxMpServiceImpl implements WxMpService {
     @Override
     public WxMpUser oauth2getUserInfo(WxMpOAuth2AccessToken token) throws WxErrorException {
         String url = String.format(WxMpService.OAUTH2_USERINFO_URL, token.getAccessToken(), token.getOpenId(), null);
-        String response = HttpClientUtil.doGet(url, null);
+        String response = HttpClientUtil.doGet(url);
         return WxMpUser.fromJson(response);
     }
 
