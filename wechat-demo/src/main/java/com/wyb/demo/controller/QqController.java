@@ -6,6 +6,7 @@ import com.wyb.mp.qq.bean.result.QqOAuth2AccessToken;
 import com.wyb.mp.qq.bean.result.QqUserInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
@@ -34,7 +35,7 @@ public class QqController {
      * code换取access_token
      */
     @RequestMapping(value = "/getAccessToken")
-    public String auth(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String auth(HttpServletRequest request, Model model) throws IOException {
         String code = request.getParameter("code");
         String status = request.getParameter("state");
         if (StringUtils.isNotBlank(code)) {
@@ -49,6 +50,9 @@ public class QqController {
             else {
                 System.out.println(qqUserInfo.toString());
             }
+            model.addAttribute("nickName", qqUserInfo.getNickname());
+            model.addAttribute("openId", token.getOpenId());
+            model.addAttribute("accessToken", token.getAccessToken());
             return "/test/success";
         } else {
             //跳转页面

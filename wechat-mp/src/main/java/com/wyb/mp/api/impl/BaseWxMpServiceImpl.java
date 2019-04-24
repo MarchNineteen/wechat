@@ -99,22 +99,22 @@ public abstract class BaseWxMpServiceImpl implements WxMpService {
 
 
     public String get(String url, Map<String, String> params) throws WxErrorException {
-        url += (url.contains("?") ? "&" : "?") + "access_token=" + getAccessToken();
+        url += (url.contains("?") ? "&" : "?") + "access_token=" + getAccessToken(false);
         return HttpClientUtil.doGet(url, params);
     }
 
     public String post(String url, Map<String, String> params) throws WxErrorException {
-        url += (url.contains("?") ? "&" : "?") + "access_token=" + getAccessToken();
+        url += (url.contains("?") ? "&" : "?") + "access_token=" + getAccessToken(false);
         return HttpClientUtil.doPost(url, params);
     }
 
     public String post(String url, String jsonString) throws WxErrorException {
-        url += (url.contains("?") ? "&" : "?") + "access_token=" + getAccessToken();
+        url += (url.contains("?") ? "&" : "?") + "access_token=" + getAccessToken(false);
         return HttpClientUtil.doPostJson(url, jsonString);
     }
 
     public String postFile(String url, File file) throws WxErrorException {
-        url += (url.contains("?") ? "&" : "?") + "access_token=" + getAccessToken();
+        url += (url.contains("?") ? "&" : "?") + "access_token=" + getAccessToken(false);
         return HttpClientUtil.doPostFile(url, file);
     }
 
