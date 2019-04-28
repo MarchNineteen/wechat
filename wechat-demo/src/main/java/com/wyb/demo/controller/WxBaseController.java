@@ -10,6 +10,7 @@ import com.wyb.mp.bean.result.WxMpOAuth2AccessToken;
 import com.wyb.mp.bean.result.WxMpUser;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -79,7 +80,7 @@ public class WxBaseController {
      */
     @RequestMapping(value = "/web/code")
     public void getWebCode(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String weiXinAuthUrl = wxMpService.buildQrConnectUrl("http://wybcs.wezoz.com/getAccessToken", "snsapi_login", null);
+        String weiXinAuthUrl = wxMpService.buildQrConnectUrl("http://dev.zerobook.com/getAccessToken", "snsapi_login", null);
         response.sendRedirect(weiXinAuthUrl);
     }
 
@@ -87,7 +88,7 @@ public class WxBaseController {
      * code换取access_token
      */
     @RequestMapping(value = "getAccessToken")
-    public String auth(HttpServletRequest request, HttpServletResponse response) throws IOException, WxErrorException {
+    public String auth(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException, WxErrorException {
         String code = request.getParameter("code");
         String status = request.getParameter("state");
 
@@ -97,6 +98,9 @@ public class WxBaseController {
             WxMpOAuth2AccessToken accessToken = wxMpService.oauth2getAccessToken(code);
             System.out.println(accessToken.getOpenId());
             WxMpUser wxMpUser = wxMpService.oauth2getUserInfo(accessToken);
+            model.addAttribute("nickName", wxMpUser.getNickname());
+            model.addAttribute("openId", wxMpUser.getOpenId());
+            model.addAttribute("accessToken", accessToken.getAccessToken());
             return "/test/success";
         } else {
             //跳转页面
