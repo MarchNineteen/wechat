@@ -1,13 +1,16 @@
 package com.wyb.demo.controller;
 
+import com.wyb.common.bean.WxJsapiSignature;
 import com.wyb.demo.bean.config.WeixinConfig;
 import com.wyb.demo.enums.WeixinAuthEnum;
 import com.wyb.demo.utils.CommonUtils;
 import com.wyb.common.exception.WxErrorException;
+import com.wyb.demo.utils.URLUtil;
 import com.wyb.demo.utils.WechatMessageUtil;
 import com.wyb.mp.api.WxMpService;
 import com.wyb.mp.bean.result.WxMpOAuth2AccessToken;
 import com.wyb.mp.bean.result.WxMpUser;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,11 +23,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Kunzite on 2016/9/13.
  */
 @Controller
+@Slf4j
 public class WxBaseController {
 
     @Resource
@@ -110,6 +117,20 @@ public class WxBaseController {
         }
     }
 
+    @RequestMapping(value = "share")
+    public String share(HttpServletRequest request, Model model) throws WxErrorException {
+        Map parameters = new HashMap();
+        parameters.putAll(request.getParameterMap());
+        // submitUrl = URLUtil.addQueryString(getRequest().getRequestURL() + "", parameters);
+        String submitUrl = URLUtil.addQueryString("http://wybcs.wezoz.com" + request.getServletPath(), parameters);
+        if (StringUtils.isBlank(submitUrl)) {
+            // submitUrl = getRequest().getRequestURL() + "";
+            submitUrl = request.getRequestURI() + request.getServletPath();
+        }
+        WxJsapiSignature signature = wxMpService.createJsapiSignature(submitUrl);
+        model.addAttribute("signature", signature);
+        return "/test/share";
+    }
 
     /**
      * 接收消息

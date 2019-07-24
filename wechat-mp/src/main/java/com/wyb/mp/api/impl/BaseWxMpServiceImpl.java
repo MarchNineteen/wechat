@@ -2,7 +2,11 @@ package com.wyb.mp.api.impl;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.wyb.common.bean.WxJsapiSignature;
+import com.wyb.common.util.RandomUtils;
+import com.wyb.common.util.crypto.SHA1;
 import com.wyb.common.util.http.HttpClientUtil;
 import com.wyb.mp.api.WxMpConfigStorage;
 import com.wyb.mp.api.WxMpMassMessageService;
@@ -12,11 +16,13 @@ import com.wyb.common.util.http.URIUtil;
 import com.wyb.mp.api.WxMpTemplateMsgService;
 import com.wyb.mp.bean.result.WxMpOAuth2AccessToken;
 import com.wyb.mp.bean.result.WxMpUser;
+import com.wyb.mp.enums.TicketType;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.util.Map;
+import java.util.concurrent.locks.Lock;
 
 /**
  * @author Kunzite
@@ -37,21 +43,72 @@ public abstract class BaseWxMpServiceImpl implements WxMpService {
 
     @Override
     public boolean checkSignature(String timestamp, String nonce, String signature) {
-//        try {
-//            return SHA1.gen(this.getWxMpConfigStorage().getToken(), timestamp, nonce)
-//                    .equals(signature);
-//        } catch (Exception e) {
-//            log.error("Checking signature failed, reason {}" + e.getMessage());
-//            return false;
-//
-//        }
+        try {
+            return SHA1.gen(this.getWxMpConfigStorage().getToken(), timestamp, nonce)
+                    .equals(signature);
+        } catch (Exception e) {
+            log.error("Checking signature failed, reason {}" + e.getMessage());
+        }
         return false;
+    }
 
+    @Override
+    public String getTicket(TicketType type) throws WxErrorException {
+        return this.getTicket(type, false);
     }
 
     @Override
     public String getAccessToken() throws WxErrorException {
         return getAccessToken(false);
+    }
+
+    @Override
+    public String getTicket(TicketType type, boolean forceRefresh) throws WxErrorException {
+        Lock lock = this.getWxMpConfigStorage().getTicketLock(type);
+        try {
+            lock.lock();
+            if (forceRefresh) {
+                this.getWxMpConfigStorage().expireTicket(type);
+            }
+
+            if (this.getWxMpConfigStorage().isTicketExpired(type)) {
+                String responseContent = this.get(WxMpService.GET_TICKET_URL + type.getCode(), null);
+                JsonObject tmpJsonObject = JSON_PARSER.parse(responseContent).getAsJsonObject();
+                String jsapiTicket = tmpJsonObject.get("ticket").getAsString();
+                int expiresInSeconds = tmpJsonObject.get("expires_in").getAsInt();
+                this.getWxMpConfigStorage().updateTicket(type, jsapiTicket, expiresInSeconds);
+            }
+        } finally {
+            lock.unlock();
+        }
+
+        return this.getWxMpConfigStorage().getTicket(type);
+    }
+
+    @Override
+    public String getJsapiTicket() throws WxErrorException {
+        return this.getJsapiTicket(false);
+    }
+
+    @Override
+    public String getJsapiTicket(boolean forceRefresh) throws WxErrorException {
+        return this.getTicket(TicketType.JSAPI, forceRefresh);
+    }
+
+    @Override
+    public WxJsapiSignature createJsapiSignature(String url) throws WxErrorException {
+        long timestamp = System.currentTimeMillis() / 1000;
+        String randomStr = RandomUtils.getRandomStr();
+        String jsapiTicket = getJsapiTicket(false);
+        String signature = SHA1.genWithAmple("jsapi_ticket=" + jsapiTicket,
+                "noncestr=" + randomStr, "timestamp=" + timestamp, "url=" + url);
+        WxJsapiSignature jsapiSignature = new WxJsapiSignature();
+        jsapiSignature.setAppId(this.getWxMpConfigStorage().getAppId());
+        jsapiSignature.setTimestamp(timestamp);
+        jsapiSignature.setNonceStr(randomStr);
+        jsapiSignature.setUrl(url);
+        jsapiSignature.setSignature(signature);
+        return jsapiSignature;
     }
 
     @Override

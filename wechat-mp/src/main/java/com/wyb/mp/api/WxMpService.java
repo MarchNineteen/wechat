@@ -1,8 +1,10 @@
 package com.wyb.mp.api;
 
+import com.wyb.common.bean.WxJsapiSignature;
 import com.wyb.common.exception.WxErrorException;
 import com.wyb.mp.bean.result.WxMpOAuth2AccessToken;
 import com.wyb.mp.bean.result.WxMpUser;
+import com.wyb.mp.enums.TicketType;
 
 import java.io.File;
 import java.util.Map;
@@ -16,6 +18,10 @@ public interface WxMpService {
      * 获取access_token.
      */
     String GET_ACCESS_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s";
+    /**
+     * 获得各种类型的ticket.
+     */
+    String GET_TICKET_URL = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?type=";
     /**
      * 用code换取oauth2的access token.
      */
@@ -74,6 +80,51 @@ public interface WxMpService {
      * @param forceRefresh 强制刷新
      */
     String getAccessToken(boolean forceRefresh) throws WxErrorException;
+
+    /**
+     * 获得ticket,不强制刷新ticket.
+     *
+     * @see #getTicket(TicketType, boolean)
+     */
+    String getTicket(TicketType type) throws WxErrorException;
+
+    /**
+     * <pre>
+     * 获得ticket.
+     * 获得时会检查 Token是否过期，如果过期了，那么就刷新一下，否则就什么都不干
+     * </pre>
+     *
+     * @param forceRefresh 强制刷新
+     */
+    String getTicket(TicketType type, boolean forceRefresh) throws WxErrorException;
+
+    /**
+     * 获得jsapi_ticket,不强制刷新jsapi_ticket.
+     *
+     * @see #getJsapiTicket(boolean)
+     */
+    String getJsapiTicket() throws WxErrorException;
+
+    /**
+     * <pre>
+     * 获得jsapi_ticket.
+     * 获得时会检查jsapiToken是否过期，如果过期了，那么就刷新一下，否则就什么都不干
+     *
+     * 详情请见：http://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421141115&token=&lang=zh_CN
+     * </pre>
+     *
+     * @param forceRefresh 强制刷新
+     */
+    String getJsapiTicket(boolean forceRefresh) throws WxErrorException;
+
+    /**
+     * <pre>
+     * 创建调用jsapi时所需要的签名.
+     *
+     * 详情请见：http://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421141115&token=&lang=zh_CN
+     * </pre>
+     */
+    WxJsapiSignature createJsapiSignature(String url) throws WxErrorException;
 
     /**
      * <pre>

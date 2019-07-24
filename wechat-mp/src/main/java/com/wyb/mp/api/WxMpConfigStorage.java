@@ -2,6 +2,7 @@ package com.wyb.mp.api;
 
 
 import com.wyb.common.bean.WxAccessToken;
+import com.wyb.mp.enums.TicketType;
 
 import java.util.concurrent.locks.Lock;
 
@@ -41,6 +42,27 @@ public interface WxMpConfigStorage {
      * @param expiresInSeconds 过期时间，以秒为单位
      */
     void updateAccessToken(String accessToken, int expiresInSeconds);
+
+    String getTicket(TicketType type);
+
+    Lock getTicketLock(TicketType type);
+
+    boolean isTicketExpired(TicketType type);
+
+    /**
+     * 强制将ticket过期掉.
+     */
+    void expireTicket(TicketType type);
+
+    /**
+     * 更新ticket.
+     * 应该是线程安全的
+     *
+     * @param type             ticket类型
+     * @param ticket           新的ticket值
+     * @param expiresInSeconds 过期时间，以秒为单位
+     */
+    void updateTicket(TicketType type, String ticket, int expiresInSeconds);
 
     String getAppId();
 
