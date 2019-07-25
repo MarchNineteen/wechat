@@ -83,12 +83,22 @@ public class WxBaseController {
     /**-------------------------页面授权 e -----------------------------*/
 
     /**
-     * 网页登录获取code
+     *  PC网页登录获取code
      */
     @RequestMapping(value = "/web/code")
     public void getWebCode(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String weiXinAuthUrl = wxMpService.buildQrConnectUrl("http://dev.zerobook.com/getAccessToken", "snsapi_login", null);
+        String weiXinAuthUrl = wxMpService.buildQrConnectUrl("http://wybcs.wezoz.com/getAccessToken", "snsapi_login", null);
         response.sendRedirect(weiXinAuthUrl);
+    }
+
+    /**
+     * H5网页授权获取code
+     */
+    @RequestMapping(value = "/h5/code")
+    public void getH5Code(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String codeUrl = wxMpService.oauth2buildAuthorizationUrl("http://wybcs.wezoz.com/getAccessToken", "snsapi_base", null);
+        log.info("codeUrl {}", codeUrl);
+        response.sendRedirect(codeUrl);
     }
 
     /**
@@ -103,10 +113,11 @@ public class WxBaseController {
         if (StringUtils.isNotBlank(code)) {
 //            WeixinAccessTokenEntity weixinTokenEntity = WeixinAuthUtil.getOauthAccessToken(code);
             WxMpOAuth2AccessToken accessToken = wxMpService.oauth2getAccessToken(code);
-            System.out.println(accessToken.getOpenId());
+            log.info("openId {}", accessToken.getOpenId());
             WxMpUser wxMpUser = wxMpService.oauth2getUserInfo(accessToken);
             model.addAttribute("nickName", wxMpUser.getNickname());
             model.addAttribute("openId", wxMpUser.getOpenId());
+            model.addAttribute("unionId", accessToken.getUnionId());
             model.addAttribute("accessToken", accessToken.getAccessToken());
             return "/test/success";
         } else {

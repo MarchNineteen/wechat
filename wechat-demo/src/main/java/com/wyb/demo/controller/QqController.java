@@ -61,4 +61,18 @@ public class QqController {
 
         }
     }
+
+    @RequestMapping(value = "/redirect")
+    public String redirect(HttpServletRequest request, Model model) throws IOException {
+        return "test/qqLogin";
+    }
+
+    /**
+     * qq js sdk 登录
+     */
+    @RequestMapping(value = "/h5Login")
+    public String h5Login(HttpServletRequest request, Model model) throws IOException {
+        return "";
+    }
+
 }

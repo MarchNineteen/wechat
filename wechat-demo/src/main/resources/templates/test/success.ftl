@@ -6,5 +6,7 @@ nickName：${nickName}
 openId：${openId}
 <br>
 accessToken：${accessToken}
+<br>
+unionId：${unionId!}
 
 </body>

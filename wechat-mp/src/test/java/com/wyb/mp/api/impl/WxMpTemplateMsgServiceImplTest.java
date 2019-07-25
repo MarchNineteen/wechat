@@ -47,8 +47,8 @@ public class WxMpTemplateMsgServiceImplTest {
 //        TestConfigStorage configStorage = (TestConfigStorage) this.wxService
 //                .getWxMpConfigStorage();
         WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
-                .touser("odnet5jB84uLoCcaPjv-eYtx0pHA")
-                .template_id("nLIIqH4xGuzJU5Dur7TONi856oyYmD85yOqnKs3DHlk")
+                .touser("odnet5gqEi0LKyZ94C3FmQGZbZUg")
+                .template_id("nRSLQ1jHNcHAmWOSmNArWivoSiPuFhTZvjgmdCCbYTk")
                 .url(" ")
                 .build();
 
