@@ -4,3 +4,4 @@
 ### wechat-common 公共
 ### wechat-mp 公众号模块
 ### wechat-program 小程序模块
+### 包括QQ第三方登录
