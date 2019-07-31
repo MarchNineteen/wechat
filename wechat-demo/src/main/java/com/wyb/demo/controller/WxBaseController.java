@@ -96,7 +96,7 @@ public class WxBaseController {
      */
     @RequestMapping(value = "/h5/code")
     public void getH5Code(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String codeUrl = wxMpService.oauth2buildAuthorizationUrl("http://wybcs.wezoz.com/getAccessToken", "snsapi_base", null);
+        String codeUrl = wxMpService.oauth2buildAuthorizationUrl("http://wybcs.wezoz.com/getAccessToken", "snsapi_userinfo", null);
         log.info("codeUrl {}", codeUrl);
         response.sendRedirect(codeUrl);
     }
