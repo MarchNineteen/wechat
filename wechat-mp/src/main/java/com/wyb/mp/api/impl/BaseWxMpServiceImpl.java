@@ -8,12 +8,9 @@ import com.wyb.common.bean.WxJsapiSignature;
 import com.wyb.common.util.RandomUtils;
 import com.wyb.common.util.crypto.SHA1;
 import com.wyb.common.util.http.HttpClientUtil;
-import com.wyb.mp.api.WxMpConfigStorage;
-import com.wyb.mp.api.WxMpMassMessageService;
-import com.wyb.mp.api.WxMpService;
+import com.wyb.mp.api.*;
 import com.wyb.common.exception.WxErrorException;
 import com.wyb.common.util.http.URIUtil;
-import com.wyb.mp.api.WxMpTemplateMsgService;
 import com.wyb.mp.bean.result.WxMpOAuth2AccessToken;
 import com.wyb.mp.bean.result.WxMpUser;
 import com.wyb.mp.enums.TicketType;
@@ -34,6 +31,7 @@ public abstract class BaseWxMpServiceImpl implements WxMpService {
     // 关联各个微信的api实现
     private WxMpTemplateMsgService wxMpTemplateMsgService = new WxMpTemplateMsgServiceImpl(this);
     private WxMpMassMessageService wxMpMassMessageService = new WxMpMassMessageServiceImpl(this);
+    private WxMpMenuService menuService = new WxMpMenuServiceImpl(this);
 
     // 微信配置
     protected WxMpConfigStorage wxMpConfigStorage;
@@ -198,5 +196,9 @@ public abstract class BaseWxMpServiceImpl implements WxMpService {
 
     public WxMpMassMessageService getWxMpMassMessageService() {
         return wxMpMassMessageService;
+    }
+
+    public WxMpMenuService getMenuService() {
+        return menuService;
     }
 }

@@ -3,6 +3,7 @@ package com.wyb.common.util.json;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.wyb.common.bean.WxAccessToken;
+import com.wyb.common.bean.menu.WxMenu;
 import com.wyb.common.exception.WxError;
 
 /**
@@ -16,6 +17,7 @@ public class WxGsonBuilder {
     INSTANCE.disableHtmlEscaping();
     INSTANCE.registerTypeAdapter(WxError.class, new WxErrorAdapter());
     INSTANCE.registerTypeAdapter(WxAccessToken.class, new WxAccessTokenAdapter());
+    INSTANCE.registerTypeAdapter(WxMenu.class, new WxMenuGsonAdapter());
   }
 
   public static Gson create() {
