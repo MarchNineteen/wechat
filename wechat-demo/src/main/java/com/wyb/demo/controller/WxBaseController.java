@@ -119,6 +119,7 @@ public class WxBaseController {
             model.addAttribute("openId", wxMpUser.getOpenId());
             model.addAttribute("unionId", accessToken.getUnionId());
             model.addAttribute("accessToken", accessToken.getAccessToken());
+            model.addAttribute("headImgUrl", wxMpUser.getHeadImgUrl());
             return "/test/success";
         } else {
             //跳转页面

@@ -70,7 +70,7 @@ public class WxMpMassMessageServiceImplTest {
         massMessage.setMsgType(WxConsts.MassMsgType.TEXT);
         massMessage.setContent("测试群发消息\n欢迎欢迎，热烈欢迎\n换行测试\n超链接:<a href=\"http://www.baidu.com\">Hello World</a><img src=\"http://mmbiz.qpic.cn/mmbiz_jpg/ibFtctoL7Z6Tia4gQjzANBGCx6rxfdoEuQXbbZske5HxQia2qcick19ajicEj2M2SribIW6Nk67lsx4LLYHWMs8TS7YA/0\"></img>");
         massMessage.getToUsers().add("odnet5jB84uLoCcaPjv-eYtx0pHA");
-        massMessage.getToUsers().add("odnet5kU5erAod3gVU2-NjqTDBpA");
+        massMessage.getToUsers().add("odnet5sGTDqFkiVoKZY9bNou2P3M");
 
         WxMpMassSendResult massResult = this.wxService.getWxMpMassMessageService()
                 .massOpenIdsMessageSend(massMessage);
