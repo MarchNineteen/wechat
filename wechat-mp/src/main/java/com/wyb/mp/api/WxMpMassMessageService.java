@@ -1,13 +1,14 @@
 package com.wyb.mp.api;
 
+import java.io.File;
+
 import com.wyb.common.exception.WxErrorException;
-import com.wyb.mp.bean.message.WxMpMassOpenIdsMessage;
 import com.wyb.mp.bean.material.WxMediaImgUploadResult;
 import com.wyb.mp.bean.message.WxMpMassNews;
+import com.wyb.mp.bean.message.WxMpMassOpenIdsMessage;
+import com.wyb.mp.bean.message.WxMpMassPreviewMessage;
 import com.wyb.mp.bean.result.WxMpMassSendResult;
 import com.wyb.mp.bean.result.WxMpMassUploadResult;
-
-import java.io.File;
 
 /**
  * 群发消息服务类.
@@ -40,7 +41,6 @@ public interface WxMpMassMessageService {
      */
     String MESSAGE_MASS_DELETE_URL = "https://api.weixin.qq.com/cgi-bin/message/mass/delete";
 
-
     /**
      * <pre>
      * 上传图文消息内的图片获取URL
@@ -49,7 +49,8 @@ public interface WxMpMassMessageService {
      * 接口url格式：https://api.weixin.qq.com/cgi-bin/media/uploadimg?access_token=ACCESS_TOKEN
      * </pre>
      *
-     * @param file 上传的文件对象
+     * @param file
+     *            上传的文件对象
      * @return WxMediaImgUploadResult 返回图片url
      * @throws WxErrorException
      */
@@ -76,7 +77,7 @@ public interface WxMpMassMessageService {
      * @see #massGroupMessageSend(WxMpMassTagMessage)
      * @see #massOpenIdsMessageSend(WxMpMassOpenIdsMessage)
      */
-//    WxMpMassUploadResult massVideoUpload(WxMpMassVideo video) throws WxErrorException;
+    // WxMpMassUploadResult massVideoUpload(WxMpMassVideo video) throws WxErrorException;
 
     /**
      * <pre>
@@ -86,7 +87,7 @@ public interface WxMpMassMessageService {
      * 详情请见: http://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140549&token=&lang=zh_CN
      * </pre>
      */
-//    WxMpMassSendResult massGroupMessageSend(WxMpMassTagMessage message) throws WxErrorException;
+    // WxMpMassSendResult massGroupMessageSend(WxMpMassTagMessage message) throws WxErrorException;
 
     /**
      * <pre>
@@ -110,7 +111,7 @@ public interface WxMpMassMessageService {
      *
      * @return wxMpMassSendResult
      */
-//    WxMpMassSendResult massMessagePreview(WxMpMassPreviewMessage wxMpMassPreviewMessage) throws WxErrorException;
+    WxMpMassSendResult massMessagePreview(WxMpMassPreviewMessage wxMpMassPreviewMessage) throws WxErrorException;
 
     /**
      * <pre>
@@ -132,6 +133,6 @@ public interface WxMpMassMessageService {
      * @param articleIndex
      *            要删除的文章在图文消息中的位置，第一篇编号为1，该字段不填或填0会删除全部文章
      */
-//    void delete(Long msgId, Integer articleIndex) throws WxErrorException;
+    // void delete(Long msgId, Integer articleIndex) throws WxErrorException;
 
 }

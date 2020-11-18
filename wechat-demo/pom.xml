@@ -88,10 +88,10 @@
 			<artifactId>commons-io</artifactId>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.lucee/commons-httpclient -->
-		<dependency>
-			<groupId>org.lucee</groupId>
-			<artifactId>commons-httpclient</artifactId>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>org.lucee</groupId>-->
+			<!--<artifactId>commons-httpclient</artifactId>-->
+		<!--</dependency>-->
 
 		<!-- alibaba的druid数据库连接池 -->
 		<dependency>

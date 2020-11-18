@@ -6,6 +6,7 @@ import com.wyb.common.api.WxConsts;
 import com.wyb.common.exception.WxErrorException;
 import com.wyb.mp.bean.message.WxMpMassNews;
 import com.wyb.mp.bean.message.WxMpMassOpenIdsMessage;
+import com.wyb.mp.bean.message.WxMpMassPreviewMessage;
 import com.wyb.mp.bean.result.WxMpMassSendResult;
 import com.wyb.mp.bean.result.WxMpMassUploadResult;
 import org.junit.Before;
@@ -68,12 +69,27 @@ public class WxMpMassMessageServiceImplTest {
         // 发送群发消息
         WxMpMassOpenIdsMessage massMessage = new WxMpMassOpenIdsMessage();
         massMessage.setMsgType(WxConsts.MassMsgType.TEXT);
-        massMessage.setContent("测试群发消息\n欢迎欢迎，热烈欢迎\n换行测试\n超链接:<a href=\"http://www.baidu.com\">Hello World</a><img src=\"http://mmbiz.qpic.cn/mmbiz_jpg/ibFtctoL7Z6Tia4gQjzANBGCx6rxfdoEuQXbbZske5HxQia2qcick19ajicEj2M2SribIW6Nk67lsx4LLYHWMs8TS7YA/0\"></img>");
+        massMessage.setContent("测试群发消息\n欢迎欢迎，热烈欢迎\n换行测试\n超链接:");
         massMessage.getToUsers().add("odnet5jB84uLoCcaPjv-eYtx0pHA");
-        massMessage.getToUsers().add("odnet5sGTDqFkiVoKZY9bNou2P3M");
+        massMessage.getToUsers().add("odnet5uBEqWpT2onpGljv8l7_LZ8");
 
         WxMpMassSendResult massResult = this.wxService.getWxMpMassMessageService()
                 .massOpenIdsMessageSend(massMessage);
+        assertNotNull(massResult);
+        assertNotNull(massResult.getMsgId());
+    }
+
+    @Test
+    public void testTextMassOpenIdMessageSend() throws WxErrorException {
+        // 发送群发消息
+        WxMpMassPreviewMessage massMessage = new WxMpMassPreviewMessage();
+        massMessage.setMsgType(WxConsts.MassMsgType.TEXT);
+        massMessage.setContent("测试单发消息\n欢迎欢迎，热烈欢迎\n换行测试\n超链接:<img src=\"http://mmbiz.qpic.cn/mmbiz_jpg/ibFtctoL7Z6Tia4gQjzANBGCx6rxfdoEuQXbbZske5HxQia2qcick19ajicEj2M2SribIW6Nk67lsx4LLYHWMs8TS7YA/0\"></img>");
+        massMessage.setToWxUserOpenid("odnet5jB84uLoCcaPjv-eYtx0pHA");
+
+        WxMpMassSendResult massResult = this.wxService.getWxMpMassMessageService()
+                .massMessagePreview(massMessage);
+        System.out.println(massResult.toString());
         assertNotNull(massResult);
         assertNotNull(massResult.getMsgId());
     }

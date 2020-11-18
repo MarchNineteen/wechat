@@ -2,6 +2,7 @@ package com.wyb.mp.api.impl;
 
 import java.io.File;
 
+import com.wyb.mp.bean.message.WxMpMassPreviewMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,9 +10,9 @@ import com.wyb.common.exception.WxError;
 import com.wyb.common.exception.WxErrorException;
 import com.wyb.mp.api.WxMpMassMessageService;
 import com.wyb.mp.api.WxMpService;
-import com.wyb.mp.bean.message.WxMpMassOpenIdsMessage;
 import com.wyb.mp.bean.material.WxMediaImgUploadResult;
 import com.wyb.mp.bean.message.WxMpMassNews;
+import com.wyb.mp.bean.message.WxMpMassOpenIdsMessage;
 import com.wyb.mp.bean.result.WxMpMassSendResult;
 import com.wyb.mp.bean.result.WxMpMassUploadResult;
 
@@ -65,13 +66,13 @@ public class WxMpMassMessageServiceImpl implements WxMpMassMessageService {
         return WxMpMassSendResult.fromJson(responseContent);
     }
 
-    // @Override
-    // public WxMpMassSendResult massMessagePreview(WxMpMassPreviewMessage wxMpMassPreviewMessage)
-    // throws WxErrorException {
-    // String responseContent = this.wxMpService.post(MESSAGE_MASS_PREVIEW_URL, wxMpMassPreviewMessage.toJson());
-    // return WxMpMassSendResult.fromJson(responseContent);
-    // }
-    //
+    @Override
+    public WxMpMassSendResult massMessagePreview(WxMpMassPreviewMessage wxMpMassPreviewMessage)
+            throws WxErrorException {
+        String responseContent = this.wxMpService.post(MESSAGE_MASS_PREVIEW_URL, wxMpMassPreviewMessage.toJson());
+        return WxMpMassSendResult.fromJson(responseContent);
+    }
+
     // @Override
     // public void delete(Long msgId, Integer articleIndex) throws WxErrorException {
     // JsonObject jsonObject = new JsonObject();

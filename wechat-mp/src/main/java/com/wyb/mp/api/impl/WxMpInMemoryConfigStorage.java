@@ -1,12 +1,12 @@
 package com.wyb.mp.api.impl;
 
-import com.wyb.mp.api.WxMpConfigStorage;
-import com.wyb.common.bean.WxAccessToken;
-import com.wyb.mp.enums.TicketType;
-
 import java.io.Serializable;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+
+import com.wyb.common.bean.WxAccessToken;
+import com.wyb.mp.api.WxMpConfigStorage;
+import com.wyb.mp.enums.TicketType;
 
 /**
  * @author Kunzite
@@ -19,7 +19,7 @@ public class WxMpInMemoryConfigStorage implements WxMpConfigStorage, Serializabl
     protected volatile String appId;
     protected volatile String secret;
     protected volatile String token;
-    protected volatile String accessToken;
+    protected volatile String accessToken = "39_UEQjtoHbuI5zJCqfa1vPPUfTfJZuK_FkXtqm-lg0eVnOX27gIkwTf8aKkgthipEpb7nYP6TvuLE4xHb9P74wYRcvAxLJ9OQGcNmf0wG_iMbwyh9JYUxbLnSrxkQf1AHsDCiw3elELv-UvGjVETFcAEAKZL";
     protected volatile String aesKey;
     protected volatile long expiresTime;// 过期时间
     protected volatile boolean autoRefreshToken;

@@ -6,6 +6,7 @@ import com.wyb.mp.bean.material.WxMediaImgUploadResult;
 import com.wyb.mp.bean.material.WxMpMaterialNews;
 import com.wyb.mp.bean.material.WxMpMaterialUploadResult;
 import com.wyb.mp.bean.message.WxMpMassOpenIdsMessage;
+import com.wyb.mp.bean.message.WxMpMassPreviewMessage;
 import com.wyb.mp.bean.result.WxMpMassSendResult;
 import com.wyb.mp.bean.result.WxMpMassUploadResult;
 import com.wyb.mp.bean.result.WxMpOAuth2AccessToken;
@@ -24,9 +25,12 @@ public class WxMpGsonBuilder {
 
         INSTANCE.registerTypeAdapter(WxMediaImgUploadResult.class, new WxMediaImgUploadResultGsonAdapter());
         INSTANCE.registerTypeAdapter(WxMpMaterialUploadResult.class, new WxMpMaterialUploadResultAdapter());
-        INSTANCE.registerTypeAdapter(WxMpMaterialNews.WxMpMaterialNewsArticle.class, new WxMpMaterialNewsArticleGsonAdapter());
+        INSTANCE.registerTypeAdapter(WxMpMaterialNews.WxMpMaterialNewsArticle.class,
+                new WxMpMaterialNewsArticleGsonAdapter());
         INSTANCE.registerTypeAdapter(WxMpMassUploadResult.class, new WxMpMassUploadResultAdapter());
         INSTANCE.registerTypeAdapter(WxMpMassSendResult.class, new WxMpMassSendResultAdapter());
+        INSTANCE.registerTypeAdapter(WxMpMassPreviewMessage.class, new WxMpMassPreviewMessageGsonAdapter());
+
     }
 
     public static Gson create() {
