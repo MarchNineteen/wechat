@@ -7,6 +7,7 @@ import com.wyb.mp.bean.material.WxMpMaterialNews;
 import com.wyb.mp.bean.material.WxMpMaterialUploadResult;
 import com.wyb.mp.bean.message.WxMpMassOpenIdsMessage;
 import com.wyb.mp.bean.message.WxMpMassPreviewMessage;
+import com.wyb.mp.bean.message.WxMpMassTagMessage;
 import com.wyb.mp.bean.result.WxMpMassSendResult;
 import com.wyb.mp.bean.result.WxMpMassUploadResult;
 import com.wyb.mp.bean.result.WxMpOAuth2AccessToken;
@@ -30,6 +31,8 @@ public class WxMpGsonBuilder {
         INSTANCE.registerTypeAdapter(WxMpMassUploadResult.class, new WxMpMassUploadResultAdapter());
         INSTANCE.registerTypeAdapter(WxMpMassSendResult.class, new WxMpMassSendResultAdapter());
         INSTANCE.registerTypeAdapter(WxMpMassPreviewMessage.class, new WxMpMassPreviewMessageGsonAdapter());
+        INSTANCE.registerTypeAdapter(WxMpMassTagMessage.class, new WxMpMassTagMessageGsonAdapter());
+
 
     }
 

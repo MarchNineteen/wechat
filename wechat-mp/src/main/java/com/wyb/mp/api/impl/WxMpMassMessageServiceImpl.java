@@ -2,7 +2,6 @@ package com.wyb.mp.api.impl;
 
 import java.io.File;
 
-import com.wyb.mp.bean.message.WxMpMassPreviewMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,6 +12,8 @@ import com.wyb.mp.api.WxMpService;
 import com.wyb.mp.bean.material.WxMediaImgUploadResult;
 import com.wyb.mp.bean.message.WxMpMassNews;
 import com.wyb.mp.bean.message.WxMpMassOpenIdsMessage;
+import com.wyb.mp.bean.message.WxMpMassPreviewMessage;
+import com.wyb.mp.bean.message.WxMpMassTagMessage;
 import com.wyb.mp.bean.result.WxMpMassSendResult;
 import com.wyb.mp.bean.result.WxMpMassUploadResult;
 
@@ -53,12 +54,13 @@ public class WxMpMassMessageServiceImpl implements WxMpMassMessageService {
     // return WxMpMassUploadResult.fromJson(responseContent);
     // }
     //
-    // @Override
-    // public WxMpMassSendResult massGroupMessageSend(WxMpMassTagMessage message) throws WxErrorException {
-    // String responseContent = this.wxMpService.post(WxMpMassMessageService.MESSAGE_MASS_SENDALL_URL,
-    // message.toJson());
-    // return WxMpMassSendResult.fromJson(responseContent);
-    // }
+
+    @Override
+    public WxMpMassSendResult massGroupMessageSend(WxMpMassTagMessage message) throws WxErrorException {
+        String responseContent = this.wxMpService.post(WxMpMassMessageService.MESSAGE_MASS_SENDALL_URL,
+                message.toJson());
+        return WxMpMassSendResult.fromJson(responseContent);
+    }
 
     @Override
     public WxMpMassSendResult massOpenIdsMessageSend(WxMpMassOpenIdsMessage message) throws WxErrorException {

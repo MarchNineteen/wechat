@@ -235,6 +235,8 @@ public interface WxMpService {
 
     public WxMpMassMessageService getWxMpMassMessageService();
 
+    public WxMpUserTagService getWxMpUserTagService();
+
     public WxMpMenuService getMenuService();
 
 }

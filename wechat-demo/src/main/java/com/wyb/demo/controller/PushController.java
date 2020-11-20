@@ -38,7 +38,7 @@ public class PushController {
         System.out.println(massResult.toString());
     }
 
-    @Scheduled(cron = "0 0 0-23 18 11 ?")
+    @Scheduled(cron = "0 0 0-23 19 11 ?")
     public void test() throws WxErrorException {
         WxMpMassPreviewMessage massMessage = new WxMpMassPreviewMessage();
         massMessage.setMsgType(WxConsts.MassMsgType.TEXT);

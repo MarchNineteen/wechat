@@ -1,21 +1,22 @@
 package com.wyb.mp.api.impl;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.io.File;
 
-import com.wyb.common.api.WxConsts;
-import com.wyb.common.exception.WxErrorException;
-import com.wyb.mp.bean.message.WxMpMassNews;
-import com.wyb.mp.bean.message.WxMpMassOpenIdsMessage;
-import com.wyb.mp.bean.message.WxMpMassPreviewMessage;
-import com.wyb.mp.bean.result.WxMpMassSendResult;
-import com.wyb.mp.bean.result.WxMpMassUploadResult;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.wyb.common.api.WxConsts;
+import com.wyb.common.exception.WxErrorException;
 import com.wyb.mp.api.WxMpService;
 import com.wyb.mp.bean.material.WxMediaImgUploadResult;
-
-import static org.junit.Assert.assertNotNull;
+import com.wyb.mp.bean.message.WxMpMassNews;
+import com.wyb.mp.bean.message.WxMpMassOpenIdsMessage;
+import com.wyb.mp.bean.message.WxMpMassPreviewMessage;
+import com.wyb.mp.bean.message.WxMpMassTagMessage;
+import com.wyb.mp.bean.result.WxMpMassSendResult;
+import com.wyb.mp.bean.result.WxMpMassUploadResult;
 
 /**
  * @author Kunzite
@@ -42,22 +43,21 @@ public class WxMpMassMessageServiceImplTest {
     @Test
     public void testMassNewsUpload() throws Exception {
         WxMpMassNews news = new WxMpMassNews();
-        WxMpMassNews.WxMpMassNewsArticle article1= new WxMpMassNews.WxMpMassNewsArticle();
+        WxMpMassNews.WxMpMassNewsArticle article1 = new WxMpMassNews.WxMpMassNewsArticle();
         article1.setTitle("标题1");
         article1.setContent("内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1");
-//        article1.setThumbMediaId(result.getUrl());
+        // article1.setThumbMediaId(result.getUrl());
         news.addArticle(article1);
 
         WxMpMassNews.WxMpMassNewsArticle article2 = new WxMpMassNews.WxMpMassNewsArticle();
         article2.setTitle("标题2");
         article2.setContent("内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2");
-//        article2.setThumbMediaId(uploadMediaRes.getMediaId());
+        // article2.setThumbMediaId(uploadMediaRes.getMediaId());
         article2.setShowCoverPic(true);
         article2.setAuthor("作者2");
         article2.setContentSourceUrl("www.baidu.com");
         article2.setDigest("摘要2");
         news.addArticle(article2);
-
 
         WxMpMassUploadResult result1 = this.wxService.getWxMpMassMessageService().massNewsUpload(news);
         assertNotNull(result1);
@@ -73,8 +73,7 @@ public class WxMpMassMessageServiceImplTest {
         massMessage.getToUsers().add("odnet5jB84uLoCcaPjv-eYtx0pHA");
         massMessage.getToUsers().add("odnet5uBEqWpT2onpGljv8l7_LZ8");
 
-        WxMpMassSendResult massResult = this.wxService.getWxMpMassMessageService()
-                .massOpenIdsMessageSend(massMessage);
+        WxMpMassSendResult massResult = this.wxService.getWxMpMassMessageService().massOpenIdsMessageSend(massMessage);
         assertNotNull(massResult);
         assertNotNull(massResult.getMsgId());
     }
@@ -84,13 +83,25 @@ public class WxMpMassMessageServiceImplTest {
         // 发送群发消息
         WxMpMassPreviewMessage massMessage = new WxMpMassPreviewMessage();
         massMessage.setMsgType(WxConsts.MassMsgType.TEXT);
-        massMessage.setContent("测试单发消息\n欢迎欢迎，热烈欢迎\n换行测试\n超链接:<img src=\"http://mmbiz.qpic.cn/mmbiz_jpg/ibFtctoL7Z6Tia4gQjzANBGCx6rxfdoEuQXbbZske5HxQia2qcick19ajicEj2M2SribIW6Nk67lsx4LLYHWMs8TS7YA/0\"></img>");
+        massMessage.setContent(
+                "测试单发消息\n欢迎欢迎，热烈欢迎\n换行测试\n超链接:<img src=\"http://mmbiz.qpic.cn/mmbiz_jpg/ibFtctoL7Z6Tia4gQjzANBGCx6rxfdoEuQXbbZske5HxQia2qcick19ajicEj2M2SribIW6Nk67lsx4LLYHWMs8TS7YA/0\"></img>");
         massMessage.setToWxUserOpenid("odnet5jB84uLoCcaPjv-eYtx0pHA");
 
-        WxMpMassSendResult massResult = this.wxService.getWxMpMassMessageService()
-                .massMessagePreview(massMessage);
+        WxMpMassSendResult massResult = this.wxService.getWxMpMassMessageService().massMessagePreview(massMessage);
         System.out.println(massResult.toString());
         assertNotNull(massResult);
+        assertNotNull(massResult.getMsgId());
+    }
+
+    @Test
+    public void testTextMassGroupMessageSend() throws WxErrorException {
+        WxMpMassTagMessage massMessage = new WxMpMassTagMessage();
+        massMessage.setMsgType(WxConsts.MassMsgType.TEXT);
+        massMessage.setContent("测试群发消息\n欢迎欢迎，热烈欢迎\n换行测试\n超链接:");
+        massMessage.setTagId(this.wxService.getWxMpUserTagService().tagGet().get(0).getId());
+
+        WxMpMassSendResult massResult = this.wxService.getWxMpMassMessageService().massGroupMessageSend(massMessage);
+        System.out.println(massResult.toString());
         assertNotNull(massResult.getMsgId());
     }
 }

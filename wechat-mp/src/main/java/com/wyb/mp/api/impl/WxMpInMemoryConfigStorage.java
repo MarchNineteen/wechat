@@ -6,6 +6,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import com.wyb.common.bean.WxAccessToken;
 import com.wyb.mp.api.WxMpConfigStorage;
+import com.wyb.mp.bean.WxMpHostConfig;
 import com.wyb.mp.enums.TicketType;
 
 /**
@@ -19,7 +20,7 @@ public class WxMpInMemoryConfigStorage implements WxMpConfigStorage, Serializabl
     protected volatile String appId;
     protected volatile String secret;
     protected volatile String token;
-    protected volatile String accessToken = "39_UEQjtoHbuI5zJCqfa1vPPUfTfJZuK_FkXtqm-lg0eVnOX27gIkwTf8aKkgthipEpb7nYP6TvuLE4xHb9P74wYRcvAxLJ9OQGcNmf0wG_iMbwyh9JYUxbLnSrxkQf1AHsDCiw3elELv-UvGjVETFcAEAKZL";
+    protected volatile String accessToken;
     protected volatile String aesKey;
     protected volatile long expiresTime;// 过期时间
     protected volatile boolean autoRefreshToken;
@@ -198,6 +199,11 @@ public class WxMpInMemoryConfigStorage implements WxMpConfigStorage, Serializabl
         return autoRefreshToken;
     }
 
+    @Override
+    public WxMpHostConfig getHostConfig() {
+        return null;
+    }
+
     public void setAppId(String appId) {
         this.appId = appId;
     }
@@ -226,6 +232,7 @@ public class WxMpInMemoryConfigStorage implements WxMpConfigStorage, Serializabl
         this.autoRefreshToken = autoRefreshToken;
     }
 
+    @Override
     public Lock getAccessTokenLock() {
         return accessTokenLock;
     }

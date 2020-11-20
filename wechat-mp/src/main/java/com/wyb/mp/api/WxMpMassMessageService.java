@@ -7,6 +7,7 @@ import com.wyb.mp.bean.material.WxMediaImgUploadResult;
 import com.wyb.mp.bean.message.WxMpMassNews;
 import com.wyb.mp.bean.message.WxMpMassOpenIdsMessage;
 import com.wyb.mp.bean.message.WxMpMassPreviewMessage;
+import com.wyb.mp.bean.message.WxMpMassTagMessage;
 import com.wyb.mp.bean.result.WxMpMassSendResult;
 import com.wyb.mp.bean.result.WxMpMassUploadResult;
 
@@ -87,7 +88,7 @@ public interface WxMpMassMessageService {
      * 详情请见: http://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140549&token=&lang=zh_CN
      * </pre>
      */
-    // WxMpMassSendResult massGroupMessageSend(WxMpMassTagMessage message) throws WxErrorException;
+     WxMpMassSendResult massGroupMessageSend(WxMpMassTagMessage message) throws WxErrorException;
 
     /**
      * <pre>
